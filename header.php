@@ -49,6 +49,26 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
 
 <div class="border-top-btp"></div>
 
+<!-- ── TOPBAR MOBILE (visível apenas em telas pequenas) ──── -->
+<div id="mobile-topbar">
+    <button id="mobile-menu-trigger" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="3" y1="6"  x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+    </button>
+    <a href="<?php echo esc_url(home_url('/')); ?>" id="mobile-logo">
+        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo_btp.png" alt="BTP Conecta">
+    </a>
+    <a href="javascript:void(0)" id="mobile-search-trigger" aria-label="Buscar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </a>
+</div>
+
+<!-- Overlay escuro ao abrir sidebar no mobile -->
+<div id="sidebar-overlay"></div>
+
 <div id="page-wrapper">
 
     <!-- ── NAVIGATION WRAPPER (sidebar + navbar) ─────────────── -->
@@ -56,26 +76,25 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
 
         <!-- Navbar superior dentro da sidebar -->
         <nav id="navbar">
-            <div id="nav-left">
-                <div id="nav-logo">
-                    <a href="<?php echo esc_url(home_url('/')); ?>">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo_btp.png" alt="BTP Conecta">
+            <!-- Logo — não alterar posição/tamanho -->
+            <div id="nav-logo">
+                <a href="<?php echo esc_url(home_url('/')); ?>">
+                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo_btp.png" alt="BTP Conecta">
+                </a>
+            </div>
+
+            <!-- Barra do usuário: nome à esquerda, ações à direita — tudo em uma linha -->
+            <div id="nav-user">
+                <span id="nav-username">Bem-vindo(a)<?php echo $btpUserName ? ', ' . esc_html($btpUserName) : ''; ?>!</span>
+                <div id="nav-actions">
+                    <a href="javascript:void(0)" id="search-trigger" title="Buscar">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </a>
+                    <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout" title="Sair">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Logout
                     </a>
                 </div>
-                <div id="nav-user">
-                    <strong>
-                        <span>Bem-vindo(a)<?php echo $btpUserName ? ', ' . esc_html($btpUserName) : ''; ?>!</span>
-                        <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout">(SAIR)</a>
-                    </strong>
-                </div>
-            </div>
-            <div id="nav-buttons">
-                <a href="javascript:void(0)" id="nav-sidebar-trigger" title="Expandir/Recolher menu">
-                    <span class="hamburger-icon">&#9776;</span>
-                </a>
-                <a href="javascript:void(0)" id="search-trigger" title="Buscar">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                </a>
             </div>
         </nav>
 

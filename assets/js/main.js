@@ -5,18 +5,36 @@
 (function ($) {
     'use strict';
 
-    // ── Toggle da sidebar (mobile) ────────────────────────────────
-    $('#nav-sidebar-trigger').on('click', function () {
-        $('#navigation-wrapper').toggleClass('sidebar-open');
+    // ── Mobile: abrir/fechar sidebar com overlay ─────────────────
+    function openSidebar() {
+        $('#navigation-wrapper').addClass('sidebar-open');
+        $('#sidebar-overlay').addClass('active');
+        $('#mobile-menu-trigger').attr('aria-expanded', 'true');
+        $('body').css('overflow', 'hidden');
+    }
+    function closeSidebar() {
+        $('#navigation-wrapper').removeClass('sidebar-open');
+        $('#sidebar-overlay').removeClass('active');
+        $('#mobile-menu-trigger').attr('aria-expanded', 'false');
+        $('body').css('overflow', '');
+    }
+
+    $('#mobile-menu-trigger').on('click', function () {
+        if ($('#navigation-wrapper').hasClass('sidebar-open')) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
     });
 
-    // Fechar sidebar ao clicar fora (mobile)
-    $(document).on('click', function (e) {
-        if ($(window).width() <= 768) {
-            if (!$(e.target).closest('#navigation-wrapper, #nav-sidebar-trigger').length) {
-                $('#navigation-wrapper').removeClass('sidebar-open');
-            }
-        }
+    // Fechar ao clicar no overlay
+    $('#sidebar-overlay').on('click', closeSidebar);
+
+    // Busca mobile usa o mesmo trigger do desktop
+    $('#mobile-search-trigger').on('click', function () {
+        closeSidebar();
+        $('#main-header').addClass('search-open');
+        setTimeout(function () { $('#main-header input[type="search"]').focus(); }, 200);
     });
 
     // ── Toggle da busca ──────────────────────────────────────────
