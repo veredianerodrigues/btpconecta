@@ -211,6 +211,45 @@ function btpconecta_pagination(): void {
     ]);
 }
 
+// ─── Categorias públicas permitidas ──────────────────────────────────────────
+
+/**
+ * Lista de slugs de categorias que possuem página de arquivo pública.
+ * Qualquer categoria fora desta lista retorna 404 ao acessar /category/{slug}/.
+ *
+ * Para adicionar uma categoria, inclua seu slug neste array.
+ */
+function btpconecta_allowed_categories(): array {
+    return [
+        'auditores-internos',
+        'masterplan',
+        'noticias',
+        'acontece-na-btp',
+        'noticias-do-setor',
+    ];
+}
+
+/**
+ * Bloqueia o acesso a arquivos de categorias não permitidas.
+ * Redireciona para 404 se o slug não estiver na lista de permitidos.
+ * Executado no hook 'template_redirect', antes de qualquer output.
+ */
+function btpconecta_restrict_category_archives(): void {
+    if ( ! is_category() ) {
+        return;
+    }
+
+    $current_slug = get_queried_object()->slug ?? '';
+
+    if ( ! in_array( $current_slug, btpconecta_allowed_categories(), true ) ) {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header( 404 );
+        nocache_headers();
+    }
+}
+add_action( 'template_redirect', 'btpconecta_restrict_category_archives' );
+
 // ─── Cor da categoria (para badges e marcadores) ─────────────────────────────
 
 /**

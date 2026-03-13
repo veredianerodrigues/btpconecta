@@ -39,7 +39,7 @@ $logo_url = esc_url(get_template_directory_uri() . '/images/logo_btp.png');
         <?php if ($cat_name) : ?>
         <a href="<?php echo esc_url($cat_url); ?>"
            class="card-category"
-           style="background-color: <?php echo esc_attr($cat_color); ?>">
+           style="color: <?php echo esc_attr($cat_color); ?>; border-color: <?php echo esc_attr($cat_color); ?>;">
             <?php echo esc_html($cat_name); ?>
         </a>
         <?php endif; ?>

@@ -16,6 +16,22 @@ if (is_category()) {
 } else {
     $archive_title = get_the_archive_title();
 }
+
+// Imagem de fundo do hero: usa a imagem destacada do post mais recente da categoria
+$hero_image_url = '';
+if (is_category()) {
+    $latest = get_posts([
+        'numberposts' => 1,
+        'category'    => get_queried_object_id(),
+        'meta_key'    => '_thumbnail_id',
+    ]);
+    if ($latest) {
+        $hero_image_url = get_the_post_thumbnail_url($latest[0]->ID, 'large');
+    }
+}
+$hero_style = $hero_image_url
+    ? 'style="background-image: url(' . esc_url($hero_image_url) . ');"'
+    : '';
 ?>
 
 <div class="content-area">
@@ -30,10 +46,12 @@ if (is_category()) {
         <a href="<?php echo esc_url(home_url('/')); ?>" class="superheader-home">Home</a>
     </div>
 
-    <!-- Hero / featuredbox -->
-    <div class="featuredbox">
-        <div class="featuredbox-inner">
-            <h1 class="archive-title"><?php echo esc_html($archive_title); ?></h1>
+    <!-- Hero com imagem de fundo (post mais recente da categoria) -->
+    <div class="post-hero<?php echo $hero_image_url ? ' has-thumbnail' : ''; ?>" <?php echo $hero_style; ?>>
+        <div class="post-hero-overlay">
+            <div class="post-hero-inner">
+                <h1 class="post-hero-title"><?php echo esc_html($archive_title); ?></h1>
+            </div>
         </div>
     </div>
 
