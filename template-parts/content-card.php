@@ -6,7 +6,7 @@
 
 $categories  = get_the_category();
 $primary_cat = !empty($categories) ? $categories[0] : null;
-$cat_color   = $primary_cat ? btpconecta_category_color($primary_cat->term_id) : '#214549';
+$cat_color   = $primary_cat ? btpconecta_category_color($primary_cat->slug) : '#214549';
 $cat_url     = $primary_cat ? get_category_link($primary_cat->term_id) : '';
 $cat_name    = $primary_cat ? $primary_cat->name : '';
 

@@ -24,14 +24,9 @@ function btpconecta_setup(): void {
     add_theme_support('wp-block-styles');           // Estilos nativos dos blocos Gutenberg
     add_theme_support('automatic-feed-links');      // Links de feed no <head>
 
-    // Locais de menu registrados
-    // 'primary'           → menu lateral principal (sidebar desktop)
-    // 'left-mobile-menu'  → reservado para uso futuro no mobile
-    // 'right-mobile-menu' → reservado para uso futuro no mobile
+    // 'primary' → menu lateral principal renderizado em header.php
     register_nav_menus([
-        'primary'           => __('Menu Principal', 'btpconecta'),
-        'left-mobile-menu'  => __('Left Mobile Menu', 'btpconecta'),
-        'right-mobile-menu' => __('Right Mobile Menu', 'btpconecta'),
+        'primary' => __('Menu Principal', 'btpconecta'),
     ]);
 }
 add_action('after_setup_theme', 'btpconecta_setup');
@@ -91,9 +86,9 @@ add_action('wp_enqueue_scripts', 'btpconecta_scripts');
 
 // ─── Segurança ────────────────────────────────────────────────────────────────
 
-// Remove a meta tag <?php esc_html_e('WordPress Generator', 'btpconecta'); ?> que expõe a versão do WP
+// Remove a meta tag WordPress Generator que expõe a versão do WP (inclui feeds RSS)
 remove_action('wp_head', 'wp_generator');
-add_filter('the_generator', '__return_empty_string');
+remove_filter('the_generator', 'wp_generator');
 
 // Oculta a barra de administração para todos os usuários no frontend
 add_filter('show_admin_bar', '__return_false');
@@ -238,21 +233,22 @@ function btpconecta_pagination(): void {
 // ─── Cor da categoria (para badges e marcadores) ─────────────────────────────
 
 /**
- * Retorna a cor hexadecimal associada a uma categoria pelo seu term_id.
+ * Retorna a cor hexadecimal associada a uma categoria pelo seu slug.
  *
- * Mapeamento baseado nos IDs de categoria do ambiente de produção.
- * Caso o ID não esteja mapeado, retorna a cor padrão (laranja/vermelho).
+ * Usa slug em vez de term_id para funcionar em qualquer ambiente
+ * (produção, QAS, local) sem depender de IDs gerados pelo banco.
+ * Mesma paleta usada nos marcadores do menu lateral (nth-child no CSS).
  *
- * @param int $cat_id  term_id da categoria WordPress
- * @return string      Cor em formato hex, ex: '#214549'
+ * @param string $slug  Slug da categoria WordPress
+ * @return string       Cor em formato hex, ex: '#214549'
  */
-function btpconecta_category_color(int $cat_id = 0): string {
-    // IDs de categoria → cor (mesma paleta dos marcadores do menu lateral)
+function btpconecta_category_color(string $slug = ''): string {
     $colors = [
-        90  => '#214549', // Institucional
-        87  => '#3AAA35', // RH para você
-        89  => '#E2AB3B', // Performance e Processos
-        220 => '#1C6C7F', // Notícias
+        'institucional'           => '#214549',
+        'rh-para-voce'            => '#3AAA35',
+        'performance-e-processos' => '#E2AB3B',
+        'noticias'                => '#1C6C7F',
+        'central-de-servicos'     => '#E94E1B',
     ];
-    return $colors[$cat_id] ?? '#E94E1B'; // fallback: Central de Serviços
+    return $colors[$slug] ?? '#E94E1B'; // fallback: laranja/vermelho
 }
