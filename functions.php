@@ -24,9 +24,9 @@ function btpconecta_setup(): void {
     add_theme_support('wp-block-styles');           // Estilos nativos dos blocos Gutenberg
     add_theme_support('automatic-feed-links');      // Links de feed no <head>
 
-    // 'primary' → menu lateral principal renderizado em header.php
     register_nav_menus([
-        'primary' => __('Menu Principal', 'btpconecta'),
+        'primary'         => __('Menu Principal', 'btpconecta'),
+        'home-shortcuts'  => __('Atalhos da Home (grid 3×2)', 'btpconecta'),
     ]);
 }
 add_action('after_setup_theme', 'btpconecta_setup');
