@@ -109,13 +109,6 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
             ]);
             ?>
 
-            <!-- Sidebar widgets (ex: calendário) -->
-            <div id="secondary" class="sidebar-container" role="complementary">
-                <a href="<?php echo esc_url(home_url('/calendario')); ?>" class="btn-calendario-hidden">Calendário</a>
-                <div class="widget-area">
-                    <?php dynamic_sidebar('sidebar-menu'); ?>
-                </div>
-            </div>
         </nav>
 
     </div><!-- /#navigation-wrapper -->

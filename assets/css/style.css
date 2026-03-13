@@ -716,8 +716,12 @@ p { margin-bottom: 1em; }
     }
     .border-top-btp { position: fixed; top: 52px; z-index: 299; }
 
-    /* ── Navbar dentro da sidebar: adiciona botão fechar ── */
-    #navbar { position: relative; padding-top: 12px; }
+    /* ── Navbar dentro da sidebar: mais compacto no mobile ── */
+    #navbar { padding: 8px 12px 8px; }
+
+    /* ── Logo menor no mobile para não ocupar espaço excessivo ── */
+    #nav-logo { margin-bottom: 6px; }
+    #nav-logo img { height: 36px; width: auto; max-width: 100%; }
 
     /* ── Touch targets maiores no menu mobile ── */
     .nav-menu > li > a          { min-height: 50px; }

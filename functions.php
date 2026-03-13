@@ -196,25 +196,6 @@ function btpconecta_excerpt_more(): string {
 }
 add_filter('excerpt_more', 'btpconecta_excerpt_more');
 
-// ─── Widgets ──────────────────────────────────────────────────────────────────
-
-/**
- * Registra as áreas de widget do tema.
- *
- * 'sidebar-menu' → área exibida abaixo do menu lateral (ex: widget de calendário)
- */
-function btpconecta_widgets_init(): void {
-    register_sidebar([
-        'name'          => __('Sidebar do Menu', 'btpconecta'),
-        'id'            => 'sidebar-menu',
-        'before_widget' => '<div class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ]);
-}
-add_action('widgets_init', 'btpconecta_widgets_init');
-
 // ─── Paginação ────────────────────────────────────────────────────────────────
 
 /**
