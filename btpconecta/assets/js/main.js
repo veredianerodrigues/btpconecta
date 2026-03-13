@@ -40,22 +40,29 @@
         }
     });
 
-    // ── Sub-menus: toggle no clique (desktop e mobile) ───────────
-    // Adiciona seta indicadora nos itens que têm sub-menu
-    $('.nav-menu > li').each(function () {
-        if ($(this).find('.sub-menu').length) {
+    // ── Sub-menus: toggle em qualquer nível de profundidade ──────
+    // Adiciona seta em TODOS os itens que têm sub-menu (qualquer nível)
+    $('.nav-menu li').each(function () {
+        if ($(this).find('> .sub-menu').length) {
             $(this).find('> a').append('<span class="menu-arrow">&#9660;</span>');
         }
     });
 
-    $('.nav-menu > li > a').on('click', function (e) {
+    // Clique em qualquer item com sub-menu
+    $('.nav-menu li > a').on('click', function (e) {
         var $li = $(this).parent();
-        if ($li.find('.sub-menu').length) {
-            e.preventDefault();
-            // Fecha outros itens abertos
-            $('.nav-menu > li').not($li).removeClass('menu-open');
-            $li.toggleClass('menu-open');
-        }
+        if (!$li.find('> .sub-menu').length) { return; } // sem sub-menu: segue o link
+
+        e.preventDefault();
+
+        var isOpen = $li.hasClass('menu-open');
+
+        // Fecha todos os irmãos (mesmo nível) e seus descendentes
+        $li.siblings().removeClass('menu-open')
+           .find('.menu-open').removeClass('menu-open');
+
+        // Toggle do item clicado
+        $li.toggleClass('menu-open', !isOpen);
     });
 
 })(jQuery);

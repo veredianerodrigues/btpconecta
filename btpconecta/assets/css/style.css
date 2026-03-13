@@ -171,7 +171,7 @@ p { margin-bottom: 1em; }
 .nav-menu > li:nth-child(4) > a::before { background: var(--menu-color-4); }
 .nav-menu > li:nth-child(5) > a::before { background: var(--menu-color-5); }
 
-/* Sub-menus */
+/* ── Sub-menus — todos os níveis ────────────────────────────── */
 .nav-menu .sub-menu {
     display: none;
     list-style: none;
@@ -179,38 +179,84 @@ p { margin-bottom: 1em; }
     margin: 0;
     background: var(--color-white);
 }
-.nav-menu li:hover > .sub-menu,
-.nav-menu li.sfHover > .sub-menu,
 .nav-menu li.menu-open > .sub-menu { display: block; }
 
-/* Sub-itens herdam a cor do pai via border-left */
-.nav-menu .sub-menu li > a {
-    display: block;
+/* ── Seta indicadora (qualquer nível) ───────────────────────── */
+.menu-arrow {
+    margin-left: auto;
+    padding-right: 10px;
+    font-size: .6em;
+    opacity: .45;
+    transition: transform .2s;
+    flex-shrink: 0;
+}
+.nav-menu li.menu-open > a .menu-arrow { transform: rotate(180deg); opacity: .75; }
+
+/* ══════════════════════════════════════════════
+   NÍVEL 2  —  filho direto do item raiz
+   ══════════════════════════════════════════════ */
+.nav-menu > li > .sub-menu > li > a {
+    display: flex;
+    align-items: center;
     font-size: .8rem;
-    color: #777;
-    padding: 8px 12px 8px 14px;
+    font-weight: 500;
+    color: #666;
+    padding: 8px 10px 8px 12px;
     border-bottom: 1px solid #f2f2f2;
     border-left: 4px solid transparent;
     text-decoration: none;
     transition: color .15s, background .15s;
 }
-.nav-menu .sub-menu li > a:hover {
+.nav-menu > li > .sub-menu > li > a:hover {
     color: var(--color-primary);
+    background: #f8f8f8;
+}
+
+/* ══════════════════════════════════════════════
+   NÍVEL 3  —  neto do item raiz
+   ══════════════════════════════════════════════ */
+.nav-menu > li > .sub-menu > li > .sub-menu > li > a {
+    display: flex;
+    align-items: center;
+    font-size: .76rem;
+    font-weight: 400;
+    color: #888;
+    padding: 7px 10px 7px 24px;
+    border-bottom: 1px solid #f5f5f5;
+    border-left: 3px solid transparent;
     background: #fafafa;
+    text-decoration: none;
+    transition: color .15s, background .15s;
+}
+.nav-menu > li > .sub-menu > li > .sub-menu > li > a:hover {
+    color: var(--color-primary);
+    background: #f2f2f2;
 }
 
-/* Seta indicadora de sub-menu */
-.menu-arrow {
-    margin-left: auto;
-    padding-right: 10px;
-    font-size: .65em;
-    opacity: .5;
-    transition: transform .2s;
-    line-height: 1;
+/* ══════════════════════════════════════════════
+   NÍVEL 4  —  bisneto do item raiz
+   ══════════════════════════════════════════════ */
+.nav-menu > li > .sub-menu > li > .sub-menu > li > .sub-menu > li > a {
+    display: flex;
+    align-items: center;
+    font-size: .72rem;
+    font-weight: 400;
+    color: #999;
+    padding: 6px 10px 6px 36px;
+    border-bottom: 1px solid #f7f7f7;
+    border-left: 2px solid transparent;
+    background: #f5f5f5;
+    text-decoration: none;
+    transition: color .15s, background .15s;
 }
-.nav-menu > li.menu-open > a .menu-arrow { transform: rotate(180deg); opacity: .8; }
+.nav-menu > li > .sub-menu > li > .sub-menu > li > .sub-menu > li > a:hover {
+    color: var(--color-primary);
+    background: #eeeeee;
+}
 
-/* Border-left colorida nos sub-itens por posição do pai */
+/* ══════════════════════════════════════════════
+   COR HERDADA DO PAI — todos os níveis (nth-child)
+   ══════════════════════════════════════════════ */
 .nav-menu > li:nth-child(1) .sub-menu li > a { border-left-color: var(--menu-color-1); }
 .nav-menu > li:nth-child(2) .sub-menu li > a { border-left-color: var(--menu-color-2); }
 .nav-menu > li:nth-child(3) .sub-menu li > a { border-left-color: var(--menu-color-3); }
