@@ -110,7 +110,17 @@ p { margin-bottom: 1em; }
 #nav-buttons a:hover { color: var(--color-blue); }
 
 /* ── Menu lateral ────────────────────────────────────────────── */
-#navigation { padding: 10px 0; }
+
+/* Cores dos 5 itens de primeiro nível — por posição (independe de ID) */
+:root {
+    --menu-color-1: #214549; /* Institucional         */
+    --menu-color-2: #E94E1B; /* Central de Serviços   */
+    --menu-color-3: #3AAA35; /* RH para você          */
+    --menu-color-4: #E2AB3B; /* Performance e Process */
+    --menu-color-5: #1C6C7F; /* Notícias              */
+}
+
+#navigation { padding: 0; }
 
 .nav-menu { list-style: none; padding: 0; margin: 0; }
 .nav-menu li { position: relative; }
@@ -119,35 +129,47 @@ p { margin-bottom: 1em; }
 .nav-menu > li > a {
     display: flex;
     align-items: stretch;
+    min-height: 44px;
     text-transform: uppercase;
-    font-size: .95em;
+    font-size: .85em;
     font-weight: 600;
     color: var(--color-primary);
-    padding: 10px 12px 10px 0;
-    border-bottom: 1px solid #f0f0f0;
     text-decoration: none;
+    border-bottom: 1px solid #ebebeb;
     transition: background .15s;
+    overflow: hidden;
 }
-.nav-menu > li > a:hover { background: #f9f9f9; }
+.nav-menu > li > a:hover { background: #f5f5f5; }
 
-/* Bloco colorido via ::before */
+/* Bloco colorido à esquerda via ::before — alinhado via flex */
 .nav-menu > li > a::before {
     content: '';
     display: block;
-    width: 10%;
-    min-width: 10%;
-    height: 100%;
-    margin-right: 8px;
-    background: var(--color-primary);
+    width: 28px;
+    min-width: 28px;
+    align-self: stretch;
+    margin-right: 10px;
     flex-shrink: 0;
+    background: var(--color-primary); /* fallback */
 }
 
-/* Cores dos marcadores por ID do item de menu */
-#menu-item-90 > a::before  { background: #214549; }
-#menu-item-87 > a::before  { background: #3AAA35; }
-#menu-item-89 > a::before  { background: #E2AB3B; }
-#menu-item-220 > a::before { background: #1C6C7F; }
-/* Central de Serviços (sem ID específico — vermelho/laranja é default para os demais) */
+/* Texto do item fica alinhado verticalmente no centro */
+.nav-menu > li > a span,
+.nav-menu > li > a {
+    align-items: center;
+}
+
+/* Wrap do texto para centralizar verticalmente */
+.nav-menu > li > a {
+    align-items: center;
+}
+
+/* Cores por posição — nth-child, sem depender de ID */
+.nav-menu > li:nth-child(1) > a::before { background: var(--menu-color-1); }
+.nav-menu > li:nth-child(2) > a::before { background: var(--menu-color-2); }
+.nav-menu > li:nth-child(3) > a::before { background: var(--menu-color-3); }
+.nav-menu > li:nth-child(4) > a::before { background: var(--menu-color-4); }
+.nav-menu > li:nth-child(5) > a::before { background: var(--menu-color-5); }
 
 /* Sub-menus */
 .nav-menu .sub-menu {
@@ -158,16 +180,42 @@ p { margin-bottom: 1em; }
     background: var(--color-white);
 }
 .nav-menu li:hover > .sub-menu,
-.nav-menu li.sfHover > .sub-menu { display: block; }
-.nav-menu .sub-menu li a {
+.nav-menu li.sfHover > .sub-menu,
+.nav-menu li.menu-open > .sub-menu { display: block; }
+
+/* Sub-itens herdam a cor do pai via border-left */
+.nav-menu .sub-menu li > a {
     display: block;
     font-size: .8rem;
-    color: #b9b9b9;
-    padding: 7px 12px 7px 20px;
-    border-bottom: 1px solid #f5f5f5;
+    color: #777;
+    padding: 8px 12px 8px 14px;
+    border-bottom: 1px solid #f2f2f2;
+    border-left: 4px solid transparent;
     text-decoration: none;
+    transition: color .15s, background .15s;
 }
-.nav-menu .sub-menu li a:hover { color: var(--color-primary); background: #fafafa; }
+.nav-menu .sub-menu li > a:hover {
+    color: var(--color-primary);
+    background: #fafafa;
+}
+
+/* Seta indicadora de sub-menu */
+.menu-arrow {
+    margin-left: auto;
+    padding-right: 10px;
+    font-size: .65em;
+    opacity: .5;
+    transition: transform .2s;
+    line-height: 1;
+}
+.nav-menu > li.menu-open > a .menu-arrow { transform: rotate(180deg); opacity: .8; }
+
+/* Border-left colorida nos sub-itens por posição do pai */
+.nav-menu > li:nth-child(1) .sub-menu li > a { border-left-color: var(--menu-color-1); }
+.nav-menu > li:nth-child(2) .sub-menu li > a { border-left-color: var(--menu-color-2); }
+.nav-menu > li:nth-child(3) .sub-menu li > a { border-left-color: var(--menu-color-3); }
+.nav-menu > li:nth-child(4) .sub-menu li > a { border-left-color: var(--menu-color-4); }
+.nav-menu > li:nth-child(5) .sub-menu li > a { border-left-color: var(--menu-color-5); }
 
 /* ── Main content ────────────────────────────────────────────── */
 #main-header {

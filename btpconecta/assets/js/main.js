@@ -40,15 +40,22 @@
         }
     });
 
-    // ── Sub-menus: toggle no clique (mobile) ─────────────────────
-    if ($(window).width() <= 768) {
-        $('.nav-menu > li > a').on('click', function (e) {
-            var $li = $(this).parent();
-            if ($li.find('.sub-menu').length) {
-                e.preventDefault();
-                $li.toggleClass('sfHover');
-            }
-        });
-    }
+    // ── Sub-menus: toggle no clique (desktop e mobile) ───────────
+    // Adiciona seta indicadora nos itens que têm sub-menu
+    $('.nav-menu > li').each(function () {
+        if ($(this).find('.sub-menu').length) {
+            $(this).find('> a').append('<span class="menu-arrow">&#9660;</span>');
+        }
+    });
+
+    $('.nav-menu > li > a').on('click', function (e) {
+        var $li = $(this).parent();
+        if ($li.find('.sub-menu').length) {
+            e.preventDefault();
+            // Fecha outros itens abertos
+            $('.nav-menu > li').not($li).removeClass('menu-open');
+            $li.toggleClass('menu-open');
+        }
+    });
 
 })(jQuery);
