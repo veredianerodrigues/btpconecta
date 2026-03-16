@@ -394,7 +394,7 @@ p { margin-bottom: 1em; }
     background: var(--color-accent);
     display: flex;
     flex-direction: column;
-    border-left: 1px solid rgba(255,255,255,.1);
+    border-left: 3px solid var(--color-primary);
 }
 .home-news-list {
     list-style: none;
@@ -403,47 +403,69 @@ p { margin-bottom: 1em; }
     flex: 1;
 }
 .home-news-item {
-    padding: 10px 14px;
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    display: flex;
+    align-items: stretch;
+    border-bottom: 2px solid rgba(0,0,0,.15);
+    min-height: 52px;
 }
-.home-news-date {
-    display: block;
-    font-size: .68rem;
-    color: rgba(0,0,0,.5);
-    margin-bottom: 2px;
+.home-news-item-body {
+    flex: 1;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .home-news-title {
     display: block;
     color: var(--color-primary);
-    font-size: .8rem;
-    font-weight: 600;
+    font-size: .78rem;
+    font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
     line-height: 1.35;
 }
 .home-news-title:hover { color: #000; text-decoration: none; }
 .home-news-excerpt {
-    font-size: .72rem;
+    font-size: .7rem;
     color: rgba(0,0,0,.6);
-    margin: 4px 0 0;
+    margin: 3px 0 0;
     line-height: 1.4;
 }
-/* "Leia tudo" — destaque com fundo primário */
-.home-news-all {
+.home-news-plus {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 13px 14px;
+    width: 36px;
+    min-width: 36px;
+    background: var(--color-primary);
+    color: var(--color-accent);
+    font-size: 1.3rem;
+    font-weight: 300;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background .15s;
+}
+.home-news-plus:hover { background: #1a363a; text-decoration: none; }
+/* "Leia tudo" */
+.home-news-all {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 11px 14px;
     background: var(--color-primary);
     color: var(--color-white);
-    font-size: .82rem;
-    font-weight: 700;
+    font-size: .78rem;
     text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    transition: background .2s, color .2s;
+    transition: background .2s;
 }
-.home-news-all:hover { background: #1a363a; color: var(--color-white); text-decoration: none; }
+.home-news-all:hover { background: #1a363a; text-decoration: none; }
+.home-news-all-plus {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+}
+.home-news-all strong { color: var(--color-accent); }
 
 /* Grid de atalhos (3 colunas × 2 linhas) — altura uniforme */
 .home-shortcuts {

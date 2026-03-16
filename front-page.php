@@ -67,19 +67,22 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
                         : wp_trim_words($np->post_content, 15, '…');
                 ?>
                 <li class="home-news-item">
-                    <span class="home-news-date"><?php echo date_i18n('d/m/Y', strtotime($np->post_date)); ?></span>
-                    <a href="<?php echo esc_url(get_permalink($np->ID)); ?>" class="home-news-title">
-                        <?php echo esc_html($np->post_title); ?>
-                    </a>
-                    <?php if ($excerpt) : ?>
-                    <p class="home-news-excerpt"><?php echo esc_html($excerpt); ?></p>
-                    <?php endif; ?>
+                    <div class="home-news-item-body">
+                        <a href="<?php echo esc_url(get_permalink($np->ID)); ?>" class="home-news-title">
+                            <?php echo esc_html($np->post_title); ?>
+                        </a>
+                        <?php if ($excerpt) : ?>
+                        <p class="home-news-excerpt"><?php echo esc_html($excerpt); ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <a href="<?php echo esc_url(get_permalink($np->ID)); ?>" class="home-news-plus" title="Leia mais">+</a>
                 </li>
                 <?php endforeach; ?>
             </ul>
             <?php if ($news_cat) : ?>
             <a href="<?php echo esc_url(get_category_link($news_cat->term_id)); ?>" class="home-news-all">
-                + <strong>Leia tudo</strong> o que Acontece na BTP
+                <span class="home-news-all-plus">+</span>
+                <span><strong>LEIA TUDO</strong> O QUE ACONTECE NA BTP</span>
             </a>
             <?php endif; ?>
         </aside>
