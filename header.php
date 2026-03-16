@@ -15,12 +15,11 @@ if (!btpconecta_logged()) {
     exit;
 }
 
-// Nome do usuário logado via cookie
-$btpUserName = '';
+// Matrícula do usuário logado via cookie (parte antes do @ no email)
+$btpMatricula = '';
 if (isset($_COOKIE['btpUserName'])) {
-    $btpUserName = htmlspecialchars($_COOKIE['btpUserName'], ENT_COMPAT, 'UTF-8', true);
-    // Exibe apenas a parte antes do @
-    $btpUserName = explode('@', $btpUserName)[0];
+    $raw          = htmlspecialchars($_COOKIE['btpUserName'], ENT_COMPAT, 'UTF-8', true);
+    $btpMatricula = explode('@', $raw)[0];
 }
 
 $logout_url = get_template_directory_uri() . '/login/php/logout.php';
@@ -74,31 +73,14 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
     <!-- ── NAVIGATION WRAPPER (sidebar + navbar) ─────────────── -->
     <div id="navigation-wrapper">
 
-        <!-- Navbar superior dentro da sidebar -->
-        <nav id="navbar">
-            <!-- Logo — não alterar posição/tamanho -->
-            <div id="nav-logo">
-                <a href="<?php echo esc_url(home_url('/')); ?>">
-                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo_btp.png" alt="BTP Conecta">
-                </a>
-            </div>
+        <!-- Logo — topo da sidebar -->
+        <div id="nav-logo">
+            <a href="<?php echo esc_url(home_url('/')); ?>">
+                <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo_btp.png" alt="BTP Conecta">
+            </a>
+        </div>
 
-            <!-- Barra do usuário: nome à esquerda, ações à direita — tudo em uma linha -->
-            <div id="nav-user">
-                <span id="nav-username">Bem-vindo(a)<?php echo $btpUserName ? ', ' . esc_html($btpUserName) : ''; ?>!</span>
-                <div id="nav-actions">
-                    <a href="javascript:void(0)" id="search-trigger" title="Buscar">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    </a>
-                    <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout" title="Sair">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                        Logout
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Menu lateral / navigation -->
+        <!-- Menu lateral — ocupa o espaço restante -->
         <nav id="navigation">
             <?php
             wp_nav_menu([
@@ -108,8 +90,23 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
                 'fallback_cb'    => false,
             ]);
             ?>
-
         </nav>
+
+        <!-- Usuário — rodapé da sidebar -->
+        <div id="nav-user">
+            <span id="nav-username">Bem-vindo(a)!</span>
+            <div id="nav-user-meta">
+                <?php if ($btpMatricula) : ?>
+                <span id="nav-matricula">Matrícula: <?php echo esc_html($btpMatricula); ?></span>
+                <span class="nav-sep">|</span>
+                <?php endif; ?>
+                <a href="javascript:void(0)" id="search-trigger" title="Buscar">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </a>
+                <span class="nav-sep">|</span>
+                <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout" title="Sair">Logout</a>
+            </div>
+        </div>
 
     </div><!-- /#navigation-wrapper -->
 

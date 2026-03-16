@@ -62,7 +62,7 @@ p { margin-bottom: 1em; }
     padding-top: 5px; /* compensar border-top */
 }
 
-/* ── Navigation wrapper (sidebar) ───────────────────────────── */
+/* ── Navigation wrapper (sidebar) — distribui logo / menu / usuário verticalmente */
 #navigation-wrapper {
     width: var(--sidebar-width);
     min-width: var(--sidebar-width);
@@ -79,54 +79,65 @@ p { margin-bottom: 1em; }
     transition: transform .3s ease;
 }
 
-/* Navbar (dentro da sidebar) */
-#navbar {
-    padding: 14px 12px 10px;
+/* Logo — topo da sidebar */
+#nav-logo {
+    padding: 18px 14px 14px;
     border-bottom: 1px solid #e8e8e8;
-}
-
-/* Logo — não mexer */
-#nav-logo { margin-bottom: 10px; }
-#nav-logo img { width: 160px; display: block; }
-
-/* Barra do usuário: nome à esquerda, ações à direita — uma linha só */
-#nav-user {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-    font-size: .78em;
-    color: var(--color-primary);
-    font-weight: 600;
-    min-height: 24px;
-}
-#nav-username {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex: 1;
-    min-width: 0;
-}
-#nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     flex-shrink: 0;
 }
-#nav-actions a {
+#nav-logo img { width: 160px; display: block; }
+
+/* Menu — ocupa todo o espaço vertical disponível */
+#navigation {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Usuário — rodapé fixo da sidebar */
+#nav-user {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: .78em;
+    color: var(--color-primary);
+    padding: 14px 16px;
+    border-top: 1px solid #e8e8e8;
+    flex-shrink: 0;
+    background: var(--color-white);
+}
+#nav-username {
+    font-weight: 700;
+    font-size: 1.05em;
+}
+#nav-user-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .9em;
+    color: #555;
+    flex-wrap: wrap;
+}
+#nav-matricula {
+    font-weight: 500;
+    color: var(--color-primary);
+}
+.nav-sep {
+    color: #ccc;
+}
+#search-trigger,
+#nav-logout {
     display: flex;
     align-items: center;
     gap: 3px;
     color: #777;
-    font-size: .75em;
     font-weight: 500;
     text-decoration: none;
     transition: color .15s;
     white-space: nowrap;
+    cursor: pointer;
 }
-#nav-actions a:hover { color: var(--color-primary); text-decoration: none; }
-#search-trigger svg,
-#nav-logout svg { flex-shrink: 0; }
+#search-trigger:hover,
+#nav-logout:hover { color: var(--color-primary); text-decoration: none; }
 
 /* ── Menu lateral ────────────────────────────────────────────── */
 
