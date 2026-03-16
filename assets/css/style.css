@@ -705,6 +705,9 @@ p { margin-bottom: 1em; }
     font-size: 1rem;
     font-weight: 700;
     color: var(--color-primary);
+    border-left: none;
+    padding-left: 0;
+    margin: 0 0 8px;
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -1104,8 +1107,28 @@ p { margin-bottom: 1em; }
 .share-btn:hover { opacity: .85; }
 .share-btn--whatsapp { background: #25d366; color: #fff; }
 .share-btn--email    { background: #214549; color: #fff; }
-.share-btn--copy     { background: #666; color: #fff; }
-.share-btn--copy.copied { background: #4d7c3a; }
+.share-btn--copy { background: #666; color: #fff; }
+
+/* ── Toast ───────────────────────────────────────────────────── */
+.btp-toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #214549;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: .9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0,0,0,.2);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+    white-space: nowrap;
+}
+.btp-toast--show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.btp-toast--error { background: #c00; }
 
 /* Modal e-mail */
 .share-modal {

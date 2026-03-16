@@ -92,17 +92,24 @@
         $li.toggleClass('menu-open', !isOpen);
     });
 
+    // ── Toast helper ──────────────────────────────────────────────
+    function btpToast(msg, type) {
+        var $t = $('<div class="btp-toast btp-toast--' + (type || 'success') + '">' + msg + '</div>');
+        $('body').append($t);
+        setTimeout(function () { $t.addClass('btp-toast--show'); }, 10);
+        setTimeout(function () {
+            $t.removeClass('btp-toast--show');
+            setTimeout(function () { $t.remove(); }, 400);
+        }, 3000);
+    }
+
     // ── Copiar URL ────────────────────────────────────────────────
     $('#share-copy-url').on('click', function () {
         var url = $(this).data('url');
-        var $btn = $(this);
         navigator.clipboard.writeText(url).then(function () {
-            $btn.addClass('copied').text('Link copiado!');
-            setTimeout(function () {
-                $btn.removeClass('copied').html(
-                    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar link'
-                );
-            }, 2500);
+            btpToast('Link copiado para a área de transferência!', 'success');
+        }).catch(function () {
+            btpToast('Não foi possível copiar o link.', 'error');
         });
     });
 

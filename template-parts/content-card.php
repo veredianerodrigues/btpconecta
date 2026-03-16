@@ -23,7 +23,7 @@ $logo_url  = esc_url(get_template_directory_uri() . '/images/logo_btp.png');
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('news-card'); ?>>
 
-    <a href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
+    <a href="<?php the_permalink(); ?>" tabindex="-1">
         <?php if (has_post_thumbnail()) : ?>
             <?php the_post_thumbnail('medium_large', ['class' => 'card-image', 'alt' => esc_attr(get_the_title())]); ?>
         <?php elseif ($first_img) : ?>
