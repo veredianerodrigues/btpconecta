@@ -1308,6 +1308,9 @@ p { margin-bottom: 1em; }
     }
     .border-top-btp { position: fixed; top: 52px; z-index: 299; }
 
+    /* ── Barra usuário: empurra abaixo da topbar ── */
+    #nav-user { margin-top: 52px; }
+
     /* ── Logo na sidebar mobile: ocultar pois a topbar já exibe ── */
     #nav-logo { display: none; }
 
