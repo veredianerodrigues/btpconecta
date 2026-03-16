@@ -1308,9 +1308,8 @@ p { margin-bottom: 1em; }
     }
     .border-top-btp { position: fixed; top: 52px; z-index: 299; }
 
-    /* ── Logo na sidebar mobile ── */
-    #nav-logo { margin: 16px 14px; }
-    #nav-logo img { height: 36px; width: auto; max-width: 100%; }
+    /* ── Logo na sidebar mobile: ocultar pois a topbar já exibe ── */
+    #nav-logo { display: none; }
 
     /* ── Touch targets maiores no menu mobile ── */
     .nav-menu > li > a          { min-height: 50px; }
