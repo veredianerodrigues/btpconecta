@@ -9,8 +9,11 @@ if (!defined('ABSPATH')) {
     require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 }
 
-// Verifica autenticação — mostra tela de login se não autenticado
-if (!btpconecta_logged()) {
+// Verifica autenticação — libera Elementor (preview/editor) e usuários logados no WP Admin
+$is_elementor = isset($_GET['elementor-preview']) || isset($_GET['elementor_library']);
+$is_wp_admin  = is_user_logged_in() && current_user_can('edit_posts');
+
+if (!$is_elementor && !$is_wp_admin && !btpconecta_logged()) {
     echo btpconecta_login_form_render();
     exit;
 }
