@@ -80,8 +80,16 @@ function btpconecta_scripts(): void {
         get_template_directory_uri() . '/assets/js/main.js',
         ['jquery'],
         '1.0.0',
-        true // footer = true
+        true
     );
+
+    // Passa dados para o JS (nonce + ajaxurl) apenas em posts individuais
+    if (is_single()) {
+        wp_localize_script('btpconecta-main', 'btpShare', [
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('btp_share_email'),
+        ]);
+    }
 }
 add_action('wp_enqueue_scripts', 'btpconecta_scripts');
 
@@ -269,6 +277,71 @@ function btpconecta_first_content_image(int $post_id): string {
     preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches);
     return $matches[1] ?? '';
 }
+
+// ─── Compartilhar por e-mail (AJAX) ──────────────────────────────────────────
+function btpconecta_share_email(): void {
+    check_ajax_referer('btp_share_email', 'nonce');
+
+    $to      = sanitize_email(wp_unslash($_POST['to'] ?? ''));
+    $post_id = (int) ($_POST['post_id'] ?? 0);
+
+    if (!is_email($to) || !$post_id) {
+        wp_send_json_error(['msg' => 'Dados inválidos.']);
+    }
+
+    $post      = get_post($post_id);
+    $title     = get_the_title($post_id);
+    $url       = get_permalink($post_id);
+    $excerpt   = get_the_excerpt($post_id) ?: wp_trim_words($post->post_content, 30, '…');
+    $thumb_url = get_the_post_thumbnail_url($post_id, 'medium_large') ?: '';
+    $logo_url  = get_template_directory_uri() . '/images/logo_btp.png';
+    $from_name = get_bloginfo('name');
+    $from_mail = get_option('admin_email');
+
+    $thumb_html = $thumb_url
+        ? '<img src="' . esc_url($thumb_url) . '" alt="" style="width:100%;max-width:600px;height:auto;display:block;border-radius:8px;margin-bottom:20px;">'
+        : '';
+
+    $body = '
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:30px 0;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;max-width:600px;width:100%;">
+      <tr><td style="background:#214549;padding:20px 30px;">
+        <img src="' . esc_url($logo_url) . '" alt="BTP Conecta" style="height:40px;width:auto;">
+      </td></tr>
+      <tr><td style="padding:30px;">
+        ' . $thumb_html . '
+        <h1 style="font-size:22px;color:#214549;margin:0 0 14px;">' . esc_html($title) . '</h1>
+        <p style="font-size:15px;color:#444;line-height:1.7;margin:0 0 24px;">' . esc_html($excerpt) . '</p>
+        <a href="' . esc_url($url) . '" style="display:inline-block;background:#4d7c3a;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:6px;font-weight:bold;font-size:15px;">Ler conteúdo completo</a>
+      </td></tr>
+      <tr><td style="background:#f5f5f5;padding:16px 30px;font-size:12px;color:#888;text-align:center;">
+        BTP Conecta &copy; ' . date('Y') . ' — Este e-mail foi compartilhado por um colaborador.
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body></html>';
+
+    $headers = [
+        'Content-Type: text/html; charset=UTF-8',
+        'From: ' . $from_name . ' <' . $from_mail . '>',
+    ];
+
+    $sent = wp_mail($to, 'Compartilhado com você: ' . $title, $body, $headers);
+
+    if ($sent) {
+        wp_send_json_success(['msg' => 'E-mail enviado com sucesso!']);
+    } else {
+        wp_send_json_error(['msg' => 'Não foi possível enviar. Tente novamente.']);
+    }
+}
+add_action('wp_ajax_btp_share_email',        'btpconecta_share_email');
+add_action('wp_ajax_nopriv_btp_share_email', 'btpconecta_share_email');
 
 // Carrega single-newsletter.php para posts da categoria newsletter
 add_filter('single_template', function (string $template): string {

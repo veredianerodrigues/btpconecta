@@ -72,6 +72,8 @@ while (have_posts()) : the_post();
                 Publicado em <?php echo get_the_date('d \d\e F \d\e Y'); ?>
             </div>
 
+            <?php get_template_part('template-parts/share', 'buttons'); ?>
+
             <!-- Botão voltar para a categoria -->
             <?php if ($primary_cat) : ?>
             <div class="post-back">

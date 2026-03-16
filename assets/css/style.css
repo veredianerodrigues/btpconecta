@@ -1077,6 +1077,92 @@ p { margin-bottom: 1em; }
 .posts-table-excerpt { font-size: .83rem; color: #666; margin-top: 4px; }
 .posts-table-date { white-space: nowrap; color: #888; font-size: .82rem; width: 100px; text-align: right; }
 
+/* ── Compartilhamento ────────────────────────────────────────── */
+.share-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 0;
+    border-top: 1px solid #e8e8e8;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+.share-label { font-size: .82rem; color: #888; font-weight: 600; }
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity .15s;
+}
+.share-btn:hover { opacity: .85; }
+.share-btn--whatsapp { background: #25d366; color: #fff; }
+.share-btn--email    { background: #214549; color: #fff; }
+.share-btn--copy     { background: #666; color: #fff; }
+.share-btn--copy.copied { background: #4d7c3a; }
+
+/* Modal e-mail */
+.share-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+}
+.share-modal.active { display: flex; }
+.share-modal-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(0,0,0,.2);
+}
+.share-modal-box h3 { font-size: 1.1rem; color: #214549; margin-bottom: 8px; }
+.share-modal-box p  { font-size: .88rem; color: #666; margin-bottom: 14px; }
+.share-modal-box input[type="email"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+.share-modal-box input[type="email"]:focus { outline: none; border-color: #214549; }
+.share-modal-actions { display: flex; justify-content: flex-end; }
+.share-modal-btn {
+    background: #214549;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s;
+}
+.share-modal-btn:hover { background: #4d7c3a; }
+.share-modal-close {
+    position: absolute;
+    top: 12px; right: 14px;
+    background: none; border: none;
+    font-size: 1.4rem; color: #888; cursor: pointer;
+}
+.share-modal-close:hover { color: #214549; }
+#share-email-msg { font-size: .85rem; margin-bottom: 8px; min-height: 20px; }
+#share-email-msg.success { color: #4d7c3a; }
+#share-email-msg.error   { color: #c00; }
+
 /* ── Busca sem resultado ──────────────────────────────────────── */
 .no-posts { padding: 40px 0; text-align: center; color: #888; }
 .search-count { font-size: .88em; color: #888; margin-bottom: 20px; }

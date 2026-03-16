@@ -51,6 +51,10 @@ while (have_posts()) : the_post();
         <?php the_content(); ?>
     </div>
 
+    <div style="padding: 0 32px;">
+        <?php get_template_part('template-parts/share', 'buttons'); ?>
+    </div>
+
     <div class="newsletter-back">
         <a href="<?php echo esc_url($cat_url); ?>" class="btn-back">&larr; Ver todas as edições</a>
     </div>
