@@ -82,7 +82,7 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
             <?php if ($news_cat) : ?>
             <a href="<?php echo esc_url(get_category_link($news_cat->term_id)); ?>" class="home-news-all">
                 <span class="home-news-all-plus">+</span>
-                <span><strong>LEIA TUDO</strong> O QUE ACONTECE NA BTP</span>
+                <span><strong>LEIA TUDO</strong>&nbsp;O QUE ACONTECE NA BTP</span>
             </a>
             <?php endif; ?>
         </aside>

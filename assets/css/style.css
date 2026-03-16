@@ -403,18 +403,15 @@ p { margin-bottom: 1em; }
     flex: 1;
 }
 .home-news-item {
-    display: flex;
-    align-items: stretch;
+    position: relative;
     border-bottom: 2px solid rgba(0,0,0,.15);
-    min-height: 52px;
+    min-height: 80px;
+    padding: 12px 40px 12px 14px;
 }
 .home-news-item-body {
-    flex: 1;
-    padding: 10px 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: block;
 }
+.home-news-date { display: none; }
 .home-news-title {
     display: block;
     color: var(--color-primary);
@@ -422,28 +419,31 @@ p { margin-bottom: 1em; }
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
-    line-height: 1.35;
+    line-height: 1.4;
 }
 .home-news-title:hover { color: #000; text-decoration: none; }
 .home-news-excerpt {
     font-size: .7rem;
     color: rgba(0,0,0,.6);
-    margin: 3px 0 0;
+    margin: 5px 0 0;
     line-height: 1.4;
 }
 .home-news-plus {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    min-width: 36px;
+    width: 26px;
+    height: 26px;
     background: var(--color-primary);
     color: var(--color-accent);
-    font-size: 1.3rem;
-    font-weight: 300;
+    font-size: 1.2rem;
+    font-weight: 400;
     text-decoration: none;
-    flex-shrink: 0;
     transition: background .15s;
+    border-radius: 2px;
 }
 .home-news-plus:hover { background: #1a363a; text-decoration: none; }
 /* "Leia tudo" */
