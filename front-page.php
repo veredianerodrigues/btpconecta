@@ -44,10 +44,8 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
 
 <div class="content-area">
 
-    <!-- ── BLOCO SUPERIOR: hero + feed de notícias ───────────── -->
     <div class="home-top">
 
-        <!-- Hero/Banner -->
         <?php if ($hero_img) : ?>
         <div class="home-hero" style="background-image: url(<?php echo esc_url($hero_img); ?>);">
             <a href="<?php echo esc_url($link_banner); ?>" class="home-hero-link">
@@ -60,7 +58,6 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
         <div class="home-hero home-hero--empty"></div>
         <?php endif; ?>
 
-        <!-- Feed Acontece na BTP -->
         <?php if ($news_posts) : ?>
         <aside class="home-news">
             <ul class="home-news-list">
@@ -88,12 +85,10 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
         </aside>
         <?php endif; ?>
 
-    </div><!-- /.home-top -->
+    </div>
 
-    <!-- ── GRID DE ATALHOS 3×2 ───────────────────────────────── -->
     <div class="home-shortcuts">
 
-        <!-- Linha 1 -->
         <a href="<?php echo esc_url(home_url('/cardapio/')); ?>" class="shortcut-tile">
             <img src="<?php echo esc_url($img_base . 'botao_home_cardapio.jpg'); ?>" alt="Cardápio do Dia"/>
         </a>
@@ -106,7 +101,6 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
             <img src="<?php echo esc_url($img_base . 'portaldocliente.png'); ?>" alt="Portal do Cliente"/>
         </a>
 
-        <!-- Linha 2 -->
         <a href="<?php echo esc_url(home_url('/propor/')); ?>" class="shortcut-tile">
             <img src="<?php echo esc_url($img_base . 'botao_home_propor.jpg'); ?>" alt="Propor"/>
         </a>
@@ -115,20 +109,18 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
             <img src="<?php echo esc_url($img_base . 'botao_home_risco.png'); ?>" alt="#DeOlhoNoRisco"/>
         </a>
 
-        <!-- Segurança: contador de dias -->
         <div class="shortcut-tile shortcut-tile--seguranca linkSeguranca"
              data-link="<?php echo esc_attr($link_seg ?: '#'); ?>"
              role="link" tabindex="0">
-            <span class="cont-dias">
-                <span>Estamos há</span>
-                <span class="contagemDias"><?php echo esc_html($dias_sem_acidente); ?></span>
-            </span>
-            <span class="texto-dias">dias sem acidente com afastamento</span>
             <img src="<?php echo esc_url($img_base . 'botao_home_seguranca.jpg'); ?>" alt="Segurança"/>
+            <div class="seguranca-counter">
+                <span class="cont-dias">ESTAMOS HÁ <span class="contagemDias"><?php echo esc_html($dias_sem_acidente); ?></span></span>
+                <span class="texto-dias">DIAS SEM ACIDENTE COM AFASTAMENTO</span>
+            </div>
         </div>
 
-    </div><!-- /.home-shortcuts -->
+    </div>
 
-</div><!-- /.content-area -->
+</div>
 
 <?php get_footer(); ?>

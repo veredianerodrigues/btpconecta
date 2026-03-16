@@ -48,7 +48,6 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
 
 <div class="border-top-btp"></div>
 
-<!-- ── TOPBAR MOBILE (visível apenas em telas pequenas) ──── -->
 <div id="mobile-topbar">
     <button id="mobile-menu-trigger" aria-label="Abrir menu" aria-expanded="false">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -65,15 +64,12 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
     </a>
 </div>
 
-<!-- Overlay escuro ao abrir sidebar no mobile -->
 <div id="sidebar-overlay"></div>
 
 <div id="page-wrapper">
 
-    <!-- ── NAVIGATION WRAPPER (sidebar) ─────────────────────── -->
     <div id="navigation-wrapper">
 
-        <!-- 1. Barra do usuário — topo verde -->
         <div id="nav-user">
             <div id="nav-user-info">
                 <span id="nav-username">Bem-vindo</span>
@@ -92,14 +88,12 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
             </div>
         </div>
 
-        <!-- 2. Logomarca — fundo escuro -->
         <div id="nav-logo">
             <a href="<?php echo esc_url(home_url('/')); ?>">
                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo_btp.png" alt="BTP Conecta">
             </a>
         </div>
 
-        <!-- 3. Menu lateral — ocupa o espaço restante -->
         <nav id="navigation">
             <?php
             wp_nav_menu([
@@ -111,12 +105,10 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
             ?>
         </nav>
 
-        <!-- 4. Rodapé da sidebar -->
         <div id="nav-footer">BTP Conecta &copy; 2026</div>
 
-    </div><!-- /#navigation-wrapper -->
+    </div>
 
-    <!-- ── HEADER / BARRA DE BUSCA ───────────────────────────── -->
     <header id="main-header">
         <div id="main-search">
             <div class="search-container">
@@ -126,5 +118,5 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
         </div>
     </header>
 
-    <!-- ── CONTEÚDO PRINCIPAL ─────────────────────────────────── -->
     <section id="main-content">
+

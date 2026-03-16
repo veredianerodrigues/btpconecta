@@ -10,7 +10,7 @@
     --color-blue:       #3146c5;
     --color-text:       #333333;
     --color-white:      #ffffff;
-    --sidebar-width:    220px;
+    --sidebar-width:    30%;
     --content-max:      780px;
     --font-body:        Arial, Helvetica, sans-serif;
     --font-heading:     'Roboto', 'PT Sans', Arial, Helvetica, sans-serif;
@@ -64,8 +64,8 @@ p { margin-bottom: 1em; }
 
 /* ── Navigation wrapper (sidebar) ───────────────────────────── */
 #navigation-wrapper {
-    width: 220px;
-    min-width: 220px;
+    width: 30%;
+    min-width: 0;
     height: 100vh;
     background: #ffffff;
     display: flex;
@@ -391,7 +391,7 @@ p { margin-bottom: 1em; }
 .home-news {
     flex: 1;
     min-width: 220px;
-    background: var(--color-primary);
+    background: var(--color-accent);
     display: flex;
     flex-direction: column;
     border-left: 1px solid rgba(255,255,255,.1);
@@ -450,7 +450,8 @@ p { margin-bottom: 1em; }
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1fr;
-    gap: 0;
+    gap: 1rem;
+    padding-top: 1rem;
 }
 .shortcut-tile {
     position: relative;
@@ -470,16 +471,52 @@ p { margin-bottom: 1em; }
 }
 .shortcut-tile:hover img { opacity: .9; transition: opacity .2s; }
 
-/* Tile Segurança (sem <a>, usa <div> com JS) */
+/* Tile Segurança — imagem no topo, contador em baixo */
 .shortcut-tile--seguranca {
     cursor: pointer;
+    background: #1565c0;
+    display: flex;
+    flex-direction: column;
 }
 .shortcut-tile--seguranca img {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    inset: auto;
     width: 100%;
-    height: 100%;
+    height: 65%;
     object-fit: cover;
+    object-position: center top;
+    flex-shrink: 0;
+}
+.seguranca-counter {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    background: #1565c0;
+    gap: 2px;
+}
+.cont-dias {
+    font-size: .78rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+.contagemDias {
+    color: var(--color-accent); /* amarelo #bdc915 */
+    font-size: 1rem;
+}
+.texto-dias {
+    font-size: .68rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    line-height: 1.3;
 }
 
 /* Responsivo home */
