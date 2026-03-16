@@ -56,7 +56,7 @@ function btpconecta_loggin_check(string $user, string $pass): bool {
             "Content-Type: application/json",
             "User-Agent: PHP"
         ],
-        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYPEER => true,
     ]);
 
     $jsonRes     = curl_exec($curl);

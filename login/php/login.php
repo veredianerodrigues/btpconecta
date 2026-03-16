@@ -57,7 +57,7 @@ if ($status === 0) {
             "Content-Type: application/json",
             "User-Agent: PHP"
         ],
-        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYPEER => true,
     ]);
 
     $jsonRes     = curl_exec($curl);
@@ -129,8 +129,8 @@ if ($status === 0) {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            setcookie("btpUserName",  '', time() - 3600, '/');
-            setcookie("btpUserToken", '', time() - 3600, '/');
+            setcookie("btpUserName",  '', 1, '/');
+            setcookie("btpUserToken", '', 1, '/');
             $status = 2;
         } else {
             $stmt = $mysqli->prepare("INSERT INTO btpconecta_tokens (token, user, pass, ip, ativo, expires_at) VALUES (?, ?, ?, ?, 1, ?)");

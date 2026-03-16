@@ -290,6 +290,9 @@ function btpconecta_share_email(): void {
     }
 
     $post      = get_post($post_id);
+    if (!$post) {
+        wp_send_json_error(['msg' => 'Post não encontrado.']);
+    }
     $title     = get_the_title($post_id);
     $url       = get_permalink($post_id);
     $excerpt   = get_the_excerpt($post_id) ?: wp_trim_words($post->post_content, 30, '…');

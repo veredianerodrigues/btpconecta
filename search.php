@@ -25,7 +25,7 @@ $search_query = get_search_query();
     </div>
 
     <div class="main-container">
-        <?php if (have_posts()) : ?>
+        <?php if (have_posts()) : global $wp_query; ?>
             <p class="search-count"><?php printf('%d resultado(s) encontrado(s)', $wp_query->found_posts); ?></p>
             <div class="posts-grid">
                 <?php while (have_posts()) : the_post(); ?>
