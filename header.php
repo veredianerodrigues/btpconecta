@@ -81,9 +81,11 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
                 <a href="javascript:void(0)" id="search-trigger" title="Buscar" class="nav-icon-btn">⌕</a>
                 <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout" title="Sair" class="nav-icon-btn nav-icon-logout">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
-                        <line x1="12" y1="2" x2="12" y2="12"/>
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
                     </svg>
+                    <span>Sair</span>
                 </a>
             </div>
         </div>

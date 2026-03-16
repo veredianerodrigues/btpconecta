@@ -132,12 +132,13 @@ p { margin-bottom: 1em; }
     transition: background .15s;
 }
 .nav-icon-btn:hover { background: #2e5620; text-decoration: none; }
-.nav-icon-logout { color: #FFCDB2; }
+.nav-icon-logout { color: #FFCDB2; width: auto; padding: 0 10px; gap: 5px; font-size: .75rem; font-weight: 600; letter-spacing: .3px; }
 
 /* 2. Logomarca — fundo branco */
 #nav-logo {
     height: 80px;
     min-height: 80px;
+    margin: 30px 26px;
     background: #ffffff;
     display: flex;
     align-items: center;
@@ -795,6 +796,8 @@ p { margin-bottom: 1em; }
     border-color: var(--color-primary);
 }
 .navigation.pagination .page-numbers.dots { border: none; color: #aaa; }
+.navigation.pagination .page-numbers.next,
+.navigation.pagination .page-numbers.prev { width: auto; padding: 0 14px; }
 
 /* ── Conteúdo do post individual ─────────────────────────────── */
 .single-post-content .entry-content,

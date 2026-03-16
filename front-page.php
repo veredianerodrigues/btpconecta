@@ -29,9 +29,10 @@ if ($data_acid) {
     $dias_sem_acidente = max(0, (int) (($dia2 - $dia1) / 86400));
 }
 
-// ── 2. FEED: últimos 3 posts da categoria "acontece-na-btp" ──────────────────
-$news_cat   = get_category_by_slug('acontece-na-btp');
-$news_posts = $news_cat ? get_posts([
+// ── 2. FEED: últimos 3 posts da categoria "destaques-da-home-page" ───────────
+$news_cat      = get_category_by_slug('destaques-da-home-page');
+$news_cat_link = get_category_by_slug('acontece-na-btp');
+$news_posts    = $news_cat ? get_posts([
     'numberposts' => 3,
     'category'    => $news_cat->term_id,
 ]) : [];
@@ -79,8 +80,8 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
                 </li>
                 <?php endforeach; ?>
             </ul>
-            <?php if ($news_cat) : ?>
-            <a href="<?php echo esc_url(get_category_link($news_cat->term_id)); ?>" class="home-news-all">
+            <?php if ($news_cat_link) : ?>
+            <a href="<?php echo esc_url(get_category_link($news_cat_link->term_id)); ?>" class="home-news-all">
                 <span class="home-news-all-plus">+</span>
                 <span><strong>LEIA TUDO</strong>&nbsp;O QUE ACONTECE NA BTP</span>
             </a>
