@@ -66,6 +66,10 @@
         }
     });
 
+    // Abre automaticamente os ancestrais do item ativo no carregamento
+    $('.nav-menu .current-menu-item, .nav-menu .current-menu-ancestor, .nav-menu .current-menu-parent')
+        .parents('li').addClass('menu-open');
+
     // Clique em qualquer item com sub-menu
     $('.nav-menu li > a').on('click', function (e) {
         var $li = $(this).parent();

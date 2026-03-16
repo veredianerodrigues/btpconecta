@@ -262,6 +262,12 @@ add_action( 'template_redirect', 'btpconecta_restrict_category_archives' );
  * @param string $slug  Slug da categoria WordPress
  * @return string       Cor em formato hex, ex: '#214549'
  */
+function btpconecta_first_content_image(int $post_id): string {
+    $content = get_post_field('post_content', $post_id);
+    preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches);
+    return $matches[1] ?? '';
+}
+
 function btpconecta_category_color(string $slug = ''): string {
     $colors = [
         'institucional'           => '#214549',

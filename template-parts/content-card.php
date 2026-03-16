@@ -16,8 +16,9 @@ if (empty($excerpt)) {
     $excerpt = wp_trim_words(get_the_content(), 20, '…');
 }
 
-// Logo para placeholder
-$logo_url = esc_url(get_template_directory_uri() . '/images/logo_btp.png');
+// Imagem: thumbnail → primeira imagem do conteúdo → logo
+$first_img = !has_post_thumbnail() ? btpconecta_first_content_image(get_the_ID()) : '';
+$logo_url  = esc_url(get_template_directory_uri() . '/images/logo_btp.png');
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('news-card'); ?>>
@@ -25,6 +26,8 @@ $logo_url = esc_url(get_template_directory_uri() . '/images/logo_btp.png');
     <a href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
         <?php if (has_post_thumbnail()) : ?>
             <?php the_post_thumbnail('medium_large', ['class' => 'card-image', 'alt' => esc_attr(get_the_title())]); ?>
+        <?php elseif ($first_img) : ?>
+            <img src="<?php echo esc_url($first_img); ?>" class="card-image" alt="<?php echo esc_attr(get_the_title()); ?>">
         <?php else : ?>
             <div class="card-image-placeholder">
                 <img src="<?php echo $logo_url; ?>" alt="BTP Conecta">
