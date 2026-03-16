@@ -73,7 +73,12 @@
     // Clique em qualquer item com sub-menu
     $('.nav-menu li > a').on('click', function (e) {
         var $li = $(this).parent();
-        if (!$li.find('> .sub-menu').length) { return; } // sem sub-menu: segue o link
+
+        // Sem sub-menu: fecha sidebar no mobile e segue o link
+        if (!$li.find('> .sub-menu').length) {
+            if ($(window).width() <= 768) { closeSidebar(); }
+            return;
+        }
 
         e.preventDefault();
 

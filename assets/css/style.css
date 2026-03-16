@@ -1060,11 +1060,22 @@ p { margin-bottom: 1em; }
         -webkit-tap-highlight-color: transparent;
     }
 
-    /* ── Sidebar: oculta por padrão, desliza do lado esquerdo ── */
+    /* ── Page wrapper: coluna única no mobile ── */
+    #page-wrapper {
+        flex-direction: column;
+    }
+
+    /* ── Sidebar: fixed, fora do fluxo, desliza da esquerda ── */
     #navigation-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        min-width: 0;
+        height: 100vh;
+        overflow-y: auto;
         transform: translateX(-100%);
         z-index: 200;
-        top: 0; /* começa do topo absoluto em mobile */
         box-shadow: none;
         transition: transform .28s cubic-bezier(.4,0,.2,1);
     }
@@ -1073,32 +1084,43 @@ p { margin-bottom: 1em; }
         box-shadow: 4px 0 24px rgba(0,0,0,.18);
     }
 
-    /* ── Conteúdo: sem margem lateral, padding-top para topbar ── */
+    /* ── Conteúdo: ocupa 100% da largura ── */
     #main-content {
+        width: 100%;
         margin-left: 0;
         padding-top: 52px;
+        min-height: calc(100vh - 52px);
     }
     .border-top-btp { position: fixed; top: 52px; z-index: 299; }
 
-    /* ── Navbar dentro da sidebar: mais compacto no mobile ── */
-    #navbar { padding: 8px 12px 8px; }
-
-    /* ── Logo menor no mobile para não ocupar espaço excessivo ── */
-    #nav-logo { margin-bottom: 6px; }
+    /* ── Logo na sidebar mobile ── */
+    #nav-logo { margin: 16px 14px; }
     #nav-logo img { height: 36px; width: auto; max-width: 100%; }
 
     /* ── Touch targets maiores no menu mobile ── */
     .nav-menu > li > a          { min-height: 50px; }
     .nav-menu .sub-menu li > a  { min-height: 44px; padding-top: 10px; padding-bottom: 10px; }
 
-    /* ── Outros ajustes de layout ── */
+    /* ── Sub-menus expandem corretamente ── */
+    .nav-menu .sub-menu { max-height: 0; overflow: hidden; display: block !important; transition: max-height .25s ease; }
+    .nav-menu li.menu-open > .sub-menu { max-height: 1000px; }
+
+    /* ── Layout geral ── */
     .main-container { padding: 16px 14px; }
     .post-hero-inner { padding: 14px 16px; }
     .post-hero-title { font-size: 1.25rem; }
     .superheader { font-size: .78em; }
+
+    /* ── Home: hero e news em coluna ── */
+    .home-top { flex-direction: column; }
+    .home-hero { min-height: 200px; width: 100%; }
+    .home-news { width: 100%; border-left: none; border-top: 3px solid var(--color-primary); }
+    .home-shortcuts { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
     .posts-grid { grid-template-columns: 1fr; }
-.main-container { padding: 14px 12px; }
+    .main-container { padding: 12px 10px; }
+    .home-shortcuts { grid-template-columns: repeat(2, 1fr); }
+    .responsive-tabs__list { flex-direction: column; gap: 2px; }
 }
