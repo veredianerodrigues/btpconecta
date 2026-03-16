@@ -345,6 +345,7 @@ p { margin-bottom: 1em; }
     display: flex;
     flex-direction: column;
     background: #ffffff;
+    padding: 0 10%;
 }
 
 /* ── Content area ────────────────────────────────────────────── */
