@@ -25,9 +25,9 @@ if ($category) {
         }
     }
 }
-$hero_style = $hero_image_url
-    ? 'style="background-image: url(' . esc_url($hero_image_url) . ');"'
-    : '';
+$default_img = get_template_directory_uri() . '/images/header_padrao.jpg';
+$hero_bg     = $hero_image_url ?: $default_img;
+$hero_style  = 'style="background-image: url(' . esc_url($hero_bg) . ');"';
 
 // Query de posts da categoria com suporte a paginação
 $paged = get_query_var('paged') ?: 1;
@@ -49,7 +49,7 @@ $query = new WP_Query([
         <a href="<?php echo esc_url(home_url('/')); ?>" class="superheader-home">Home</a>
     </div>
 
-    <div class="post-hero<?php echo $hero_image_url ? ' has-thumbnail' : ''; ?>" <?php echo $hero_style; ?>>
+    <div class="post-hero has-thumbnail" <?php echo $hero_style; ?>>
         <div class="post-hero-overlay">
             <div class="post-hero-inner">
                 <h1 class="post-hero-title"><?php echo esc_html($archive_title); ?></h1>

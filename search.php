@@ -15,9 +15,12 @@ $search_query = get_search_query();
         <a href="<?php echo esc_url(home_url('/')); ?>" class="superheader-home">Home</a>
     </div>
 
-    <div class="featuredbox">
-        <div class="featuredbox-inner">
-            <h1>Resultados para: <em><?php echo esc_html($search_query); ?></em></h1>
+    <?php $default_img = get_template_directory_uri() . '/images/header_padrao.jpg'; ?>
+    <div class="post-hero has-thumbnail" style="background-image: url(<?php echo esc_url($default_img); ?>);">
+        <div class="post-hero-overlay">
+            <div class="post-hero-inner">
+                <h1 class="post-hero-title">Resultados para: <em><?php echo esc_html($search_query); ?></em></h1>
+            </div>
         </div>
     </div>
 
