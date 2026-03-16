@@ -10,7 +10,7 @@
     --color-blue:       #3146c5;
     --color-text:       #333333;
     --color-white:      #ffffff;
-    --sidebar-width:    30%;
+    --sidebar-width:    240px;
     --content-max:      780px;
     --font-body:        Arial, Helvetica, sans-serif;
     --font-heading:     'Roboto', 'PT Sans', Arial, Helvetica, sans-serif;
@@ -69,8 +69,8 @@ p { margin-bottom: 1em; }
 
 /* ── Navigation wrapper (sidebar) ───────────────────────────── */
 #navigation-wrapper {
-    width: 30%;
-    min-width: 0;
+    width: 240px;
+    min-width: 240px;
     background: #ffffff;
     display: flex;
     flex-direction: column;
