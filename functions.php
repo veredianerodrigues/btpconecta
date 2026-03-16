@@ -227,6 +227,7 @@ function btpconecta_allowed_categories(): array {
         'noticias',
         'acontece-na-btp',
         'noticias-do-setor',
+        'newsletter',
     ];
 }
 
@@ -268,6 +269,17 @@ function btpconecta_first_content_image(int $post_id): string {
     preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches);
     return $matches[1] ?? '';
 }
+
+// Carrega single-newsletter.php para posts da categoria newsletter
+add_filter('single_template', function (string $template): string {
+    if (is_single() && in_category('newsletter')) {
+        $custom = get_template_directory() . '/single-newsletter.php';
+        if (file_exists($custom)) {
+            return $custom;
+        }
+    }
+    return $template;
+});
 
 function btpconecta_category_color(string $slug = ''): string {
     $colors = [
