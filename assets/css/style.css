@@ -323,12 +323,15 @@ p { margin-bottom: 1em; }
 #main-header {
     position: sticky;
     top: 0;
+    left: 0;
+    right: 0;
     height: 0;
     overflow: hidden;
     background: var(--color-white);
     box-shadow: 0 2px 8px rgba(0,0,0,.08);
     z-index: 90;
     transition: height .2s ease;
+    flex-shrink: 0;
 }
 #main-header.search-open { height: 56px; }
 #main-search { padding: 8px 20px; }

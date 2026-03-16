@@ -109,6 +109,8 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
 
     </div>
 
+    <section id="main-content">
+
     <header id="main-header">
         <div id="main-search">
             <div class="search-container">
@@ -117,6 +119,4 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
             </div>
         </div>
     </header>
-
-    <section id="main-content">
 
