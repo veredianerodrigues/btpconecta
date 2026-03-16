@@ -106,11 +106,24 @@
     // ── Copiar URL ────────────────────────────────────────────────
     $('#share-copy-url').on('click', function () {
         var url = $(this).data('url');
-        navigator.clipboard.writeText(url).then(function () {
-            btpToast('Link copiado para a área de transferência!', 'success');
-        }).catch(function () {
-            btpToast('Não foi possível copiar o link.', 'error');
-        });
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(url).then(function () {
+                btpToast('Link copiado para a área de transferência!', 'success');
+            }).catch(function () {
+                btpToast('Não foi possível copiar o link.', 'error');
+            });
+        } else {
+            // Fallback para HTTP
+            var $tmp = $('<textarea>').val(url).appendTo('body').select();
+            try {
+                document.execCommand('copy');
+                btpToast('Link copiado para a área de transferência!', 'success');
+            } catch (e) {
+                btpToast('Não foi possível copiar o link.', 'error');
+            }
+            $tmp.remove();
+        }
     });
 
     // ── Compartilhar por e-mail ───────────────────────────────────
