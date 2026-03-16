@@ -67,17 +67,10 @@ while (have_posts()) : the_post();
                 <?php the_content(); ?>
             </div>
 
-            <!-- Navegação entre posts da mesma categoria -->
-            <nav class="post-navigation" aria-label="Navegação entre posts">
-                <?php
-                the_post_navigation([
-                    'in_same_term'   => true,
-                    'taxonomy'       => 'category',
-                    'prev_text'      => '<span class="nav-arrow">&larr;</span> <span class="nav-label">Post Anterior</span><br><span class="nav-title">%title</span>',
-                    'next_text'      => '<span class="nav-label">Próximo Post</span> <span class="nav-arrow">&rarr;</span><br><span class="nav-title">%title</span>',
-                ]);
-                ?>
-            </nav>
+            <div class="post-pub-date">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Publicado em <?php echo get_the_date('d \d\e F \d\e Y'); ?>
+            </div>
 
             <!-- Botão voltar para a categoria -->
             <?php if ($primary_cat) : ?>

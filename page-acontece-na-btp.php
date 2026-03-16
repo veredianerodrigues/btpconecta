@@ -16,9 +16,13 @@ if ($category) {
         'numberposts' => 1,
         'category'    => $category->term_id,
         'meta_key'    => '_thumbnail_id',
+        'post_type'   => 'post',
     ]);
     if ($latest) {
-        $hero_image_url = get_the_post_thumbnail_url($latest[0]->ID, 'large');
+        $url = get_the_post_thumbnail_url($latest[0]->ID, 'large');
+        if ($url) {
+            $hero_image_url = $url;
+        }
     }
 }
 $hero_style = $hero_image_url

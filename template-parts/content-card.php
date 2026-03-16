@@ -22,18 +22,16 @@ $logo_url = esc_url(get_template_directory_uri() . '/images/logo_btp.png');
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('news-card'); ?>>
 
-    <!-- Imagem de capa -->
     <a href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
         <?php if (has_post_thumbnail()) : ?>
             <?php the_post_thumbnail('medium_large', ['class' => 'card-image', 'alt' => esc_attr(get_the_title())]); ?>
         <?php else : ?>
-            <div class="card-image-placeholder" style="background-color: <?php echo esc_attr($cat_color); ?>;">
+            <div class="card-image-placeholder">
                 <img src="<?php echo $logo_url; ?>" alt="BTP Conecta">
             </div>
         <?php endif; ?>
     </a>
 
-    <!-- Corpo do card -->
     <div class="card-body">
 
         <?php if ($cat_name) : ?>

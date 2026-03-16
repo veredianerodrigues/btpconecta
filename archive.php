@@ -24,9 +24,13 @@ if (is_category()) {
         'numberposts' => 1,
         'category'    => get_queried_object_id(),
         'meta_key'    => '_thumbnail_id',
+        'post_type'   => 'post',
     ]);
     if ($latest) {
-        $hero_image_url = get_the_post_thumbnail_url($latest[0]->ID, 'large');
+        $url = get_the_post_thumbnail_url($latest[0]->ID, 'large');
+        if ($url) {
+            $hero_image_url = $url;
+        }
     }
 }
 $hero_style = $hero_image_url
@@ -36,7 +40,6 @@ $hero_style = $hero_image_url
 
 <div class="content-area">
 
-    <!-- Superheader / breadcrumb -->
     <div class="superheader">
         <span class="superheader-breadcrumb">
             <a href="<?php echo esc_url(home_url('/')); ?>">Início</a>
@@ -46,7 +49,6 @@ $hero_style = $hero_image_url
         <a href="<?php echo esc_url(home_url('/')); ?>" class="superheader-home">Home</a>
     </div>
 
-    <!-- Hero com imagem de fundo (post mais recente da categoria) -->
     <div class="post-hero<?php echo $hero_image_url ? ' has-thumbnail' : ''; ?>" <?php echo $hero_style; ?>>
         <div class="post-hero-overlay">
             <div class="post-hero-inner">
@@ -56,29 +58,6 @@ $hero_style = $hero_image_url
     </div>
 
     <div class="main-container">
-
-        <?php if (is_category()) : ?>
-        <!-- Filtro de categorias irmãs -->
-        <div class="category-filter">
-            <?php
-            $current_cat = get_queried_object();
-            $sibling_cats = get_categories([
-                'parent'  => $current_cat->parent,
-                'exclude' => $current_cat->term_id,
-                'hide_empty' => true,
-            ]);
-            if ($sibling_cats) :
-            ?>
-            <span class="filter-label">Categorias:</span>
-            <a href="<?php echo esc_url(get_category_link($current_cat->term_id)); ?>"
-               class="filter-pill active"><?php echo esc_html($current_cat->name); ?></a>
-            <?php foreach ($sibling_cats as $cat) : ?>
-                <a href="<?php echo esc_url(get_category_link($cat->term_id)); ?>"
-                   class="filter-pill"><?php echo esc_html($cat->name); ?></a>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
-        <?php endif; ?>
 
         <?php if (have_posts()) : ?>
             <div class="posts-grid">
