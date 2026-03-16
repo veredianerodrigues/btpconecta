@@ -72,10 +72,7 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
 
         <div id="nav-user">
             <div id="nav-user-info">
-                <span id="nav-username">Bem-vindo</span>
-                <?php if ($btpMatricula) : ?>
-                <span id="nav-matricula">Matrícula: <?php echo esc_html($btpMatricula); ?></span>
-                <?php endif; ?>
+                <span id="nav-username">Bem-vindo(a)!</span>
             </div>
             <div id="nav-user-icons">
                 <a href="javascript:void(0)" id="search-trigger" title="Buscar" class="nav-icon-btn">⌕</a>
