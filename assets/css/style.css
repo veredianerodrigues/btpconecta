@@ -10,7 +10,7 @@
     --color-blue:       #3146c5;
     --color-text:       #333333;
     --color-white:      #ffffff;
-    --sidebar-width:    250px;
+    --sidebar-width:    220px;
     --content-max:      780px;
     --font-body:        Arial, Helvetica, sans-serif;
     --font-heading:     'Roboto', 'PT Sans', Arial, Helvetica, sans-serif;
@@ -62,95 +62,121 @@ p { margin-bottom: 1em; }
     padding-top: 5px; /* compensar border-top */
 }
 
-/* ── Navigation wrapper (sidebar) — distribui logo / menu / usuário verticalmente */
+/* ── Navigation wrapper (sidebar) ───────────────────────────── */
 #navigation-wrapper {
-    width: var(--sidebar-width);
-    min-width: var(--sidebar-width);
-    background: var(--color-white);
+    width: 220px;
+    min-width: 220px;
+    height: 100vh;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid #e8e8e8;
+    border-radius: 12px;
+    border: 0.5px solid #E0E0E0;
     position: fixed;
-    top: 5px;
     left: 0;
-    bottom: 0;
+    top: 0;
     z-index: 100;
-    overflow-y: auto;
+    overflow: hidden;
     transition: transform .3s ease;
 }
 
-/* Logo — topo da sidebar */
-#nav-logo {
-    padding: 18px 14px 14px;
-    border-bottom: 1px solid #e8e8e8;
+/* 1. Barra do usuário — topo verde */
+#nav-user {
+    height: 48px;
+    min-height: 48px;
+    background: #4D7C3A;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
     flex-shrink: 0;
 }
-#nav-logo img { width: 160px; display: block; }
+#nav-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+#nav-username {
+    font-size: 10px;
+    color: #D4EFC4;
+    font-weight: 400;
+    line-height: 1.2;
+}
+#nav-matricula {
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1.2;
+}
+#nav-user-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.nav-icon-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #3A6B2A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #D4EFC4;
+    text-decoration: none;
+    line-height: 1;
+    transition: background .15s;
+}
+.nav-icon-btn:hover { background: #2e5620; text-decoration: none; }
+.nav-icon-logout { color: #FFCDB2; }
 
-/* Menu — ocupa todo o espaço vertical disponível */
+/* 2. Logomarca — fundo branco */
+#nav-logo {
+    height: 80px;
+    min-height: 80px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    flex-shrink: 0;
+}
+#nav-logo a { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+#nav-logo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+
+/* 3. Menu — ocupa o espaço restante */
 #navigation {
     flex: 1;
     overflow-y: auto;
+    background: #ffffff;
+    padding: 8px;
 }
 
-/* Usuário — rodapé fixo da sidebar */
-#nav-user {
+/* 4. Rodapé da sidebar */
+#nav-footer {
+    height: 28px;
+    min-height: 28px;
+    background: #F5F5F5;
+    border-radius: 0 0 12px 12px;
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: .78em;
-    color: var(--color-primary);
-    padding: 14px 16px;
-    border-top: 1px solid #e8e8e8;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #AAAAAA;
     flex-shrink: 0;
-    background: var(--color-white);
 }
-#nav-username {
-    font-weight: 700;
-    font-size: 1.05em;
-}
-#nav-user-meta {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: .9em;
-    color: #555;
-    flex-wrap: wrap;
-}
-#nav-matricula {
-    font-weight: 500;
-    color: var(--color-primary);
-}
-.nav-sep {
-    color: #ccc;
-}
-#search-trigger,
-#nav-logout {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    color: #777;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color .15s;
-    white-space: nowrap;
-    cursor: pointer;
-}
-#search-trigger:hover,
-#nav-logout:hover { color: var(--color-primary); text-decoration: none; }
 
 /* ── Menu lateral ────────────────────────────────────────────── */
 
 /* Cores dos 5 itens de primeiro nível — por posição (independe de ID) */
 :root {
-    --menu-color-1: #214549; /* Institucional         */
-    --menu-color-2: #E94E1B; /* Central de Serviços   */
-    --menu-color-3: #3AAA35; /* RH para você          */
-    --menu-color-4: #E2AB3B; /* Performance e Process */
-    --menu-color-5: #1C6C7F; /* Notícias              */
+    --menu-color-1: #4D7C3A; /* Institucional         */
+    --menu-color-2: #E55A2B; /* Central de Serviços   */
+    --menu-color-3: #4D7C3A; /* RH para você          */
+    --menu-color-4: #E8B830; /* Performance e Process */
+    --menu-color-5: #2B6FA8; /* Notícias              */
 }
-
-#navigation { padding: 0; }
 
 .nav-menu { list-style: none; padding: 0; margin: 0; }
 .nav-menu li { position: relative; }
@@ -158,48 +184,41 @@ p { margin-bottom: 1em; }
 /* Itens de primeiro nível */
 .nav-menu > li > a {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     min-height: 44px;
-    text-transform: uppercase;
-    font-size: .85em;
-    font-weight: 600;
-    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 400;
+    color: #333333;
     text-decoration: none;
-    border-bottom: 1px solid #ebebeb;
-    transition: background .15s;
+    border-radius: 8px;
+    border-left: 3px solid #cccccc;
+    padding: 0 12px;
+    margin-bottom: 2px;
+    transition: background .15s, color .15s;
     overflow: hidden;
 }
-.nav-menu > li > a:hover { background: #f5f5f5; }
-
-/* Bloco colorido à esquerda via ::before — alinhado via flex */
-.nav-menu > li > a::before {
-    content: '';
-    display: block;
-    width: 28px;
-    min-width: 28px;
-    align-self: stretch;
-    margin-right: 10px;
-    flex-shrink: 0;
-    background: var(--color-primary); /* fallback */
+.nav-menu > li > a:hover {
+    background: #EAF4E2;
+    color: #2C5A1E;
+    text-decoration: none;
 }
 
-/* Texto do item fica alinhado verticalmente no centro */
-.nav-menu > li > a span,
-.nav-menu > li > a {
-    align-items: center;
+/* Item ativo */
+.nav-menu > li.current-menu-item > a,
+.nav-menu > li.current-menu-ancestor > a {
+    background: #EAF4E2;
+    color: #2C5A1E;
+    font-weight: 700;
 }
+.nav-menu > li.current-menu-item > a .menu-arrow,
+.nav-menu > li.current-menu-ancestor > a .menu-arrow { color: #7AAA60; }
 
-/* Wrap do texto para centralizar verticalmente */
-.nav-menu > li > a {
-    align-items: center;
-}
-
-/* Cores por posição — nth-child, sem depender de ID */
-.nav-menu > li:nth-child(1) > a::before { background: var(--menu-color-1); }
-.nav-menu > li:nth-child(2) > a::before { background: var(--menu-color-2); }
-.nav-menu > li:nth-child(3) > a::before { background: var(--menu-color-3); }
-.nav-menu > li:nth-child(4) > a::before { background: var(--menu-color-4); }
-.nav-menu > li:nth-child(5) > a::before { background: var(--menu-color-5); }
+/* Cores da borda esquerda por posição */
+.nav-menu > li:nth-child(1) > a { border-left-color: var(--menu-color-1); }
+.nav-menu > li:nth-child(2) > a { border-left-color: var(--menu-color-2); }
+.nav-menu > li:nth-child(3) > a { border-left-color: var(--menu-color-3); }
+.nav-menu > li:nth-child(4) > a { border-left-color: var(--menu-color-4); }
+.nav-menu > li:nth-child(5) > a { border-left-color: var(--menu-color-5); }
 
 /* ── Sub-menus — todos os níveis ────────────────────────────── */
 .nav-menu .sub-menu {
@@ -324,10 +343,11 @@ p { margin-bottom: 1em; }
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background: #ffffff;
 }
 
 /* ── Content area ────────────────────────────────────────────── */
-.content-area { flex: 1; }
+.content-area { flex: 1; background: #ffffff; }
 
 /* ══════════════════════════════════════════════
    HOME PAGE
@@ -385,6 +405,12 @@ p { margin-bottom: 1em; }
     padding: 10px 14px;
     border-bottom: 1px solid rgba(255,255,255,.12);
 }
+.home-news-date {
+    display: block;
+    font-size: .68rem;
+    color: rgba(255,255,255,.5);
+    margin-bottom: 2px;
+}
 .home-news-title {
     display: block;
     color: var(--color-white);
@@ -401,51 +427,58 @@ p { margin-bottom: 1em; }
     margin: 4px 0 0;
     line-height: 1.4;
 }
+/* "Leia tudo" — destaque maior */
 .home-news-all {
-    display: block;
-    padding: 10px 14px;
-    background: rgba(0,0,0,.2);
-    color: var(--color-accent);
-    font-size: .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 14px;
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-size: .82rem;
     font-weight: 700;
     text-decoration: none;
     text-transform: uppercase;
+    letter-spacing: .5px;
+    transition: background .2s, color .2s;
 }
-.home-news-all:hover { background: rgba(0,0,0,.35); text-decoration: none; }
+.home-news-all:hover { background: #cdd918; color: var(--color-primary); text-decoration: none; }
 
-/* Grid de atalhos (3 colunas × N linhas) */
+/* Grid de atalhos (3 colunas × 2 linhas) — altura uniforme */
 .home-shortcuts {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
     gap: 0;
 }
 .shortcut-tile {
     position: relative;
     aspect-ratio: 16 / 9;
-    background-size: cover;
-    background-position: center;
     background-color: var(--color-primary);
     text-decoration: none;
     overflow: hidden;
     display: block;
 }
-.shortcut-overlay {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,.35);
-    display: flex;
-    align-items: flex-end;
-    padding: 12px 14px;
-    transition: background .2s;
+.shortcut-tile img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
-.shortcut-tile:hover .shortcut-overlay { background: rgba(0,0,0,.55); }
-.shortcut-label {
-    color: var(--color-white);
-    font-family: var(--font-heading);
-    font-size: .85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    text-shadow: 0 1px 3px rgba(0,0,0,.6);
+.shortcut-tile:hover img { opacity: .9; transition: opacity .2s; }
+
+/* Tile Segurança (sem <a>, usa <div> com JS) */
+.shortcut-tile--seguranca {
+    cursor: pointer;
+}
+.shortcut-tile--seguranca img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Responsivo home */

@@ -70,17 +70,31 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
 
 <div id="page-wrapper">
 
-    <!-- ── NAVIGATION WRAPPER (sidebar + navbar) ─────────────── -->
+    <!-- ── NAVIGATION WRAPPER (sidebar) ─────────────────────── -->
     <div id="navigation-wrapper">
 
-        <!-- Logo — topo da sidebar -->
+        <!-- 1. Barra do usuário — topo verde -->
+        <div id="nav-user">
+            <div id="nav-user-info">
+                <span id="nav-username">Bem-vindo</span>
+                <?php if ($btpMatricula) : ?>
+                <span id="nav-matricula">Matrícula: <?php echo esc_html($btpMatricula); ?></span>
+                <?php endif; ?>
+            </div>
+            <div id="nav-user-icons">
+                <a href="javascript:void(0)" id="search-trigger" title="Buscar" class="nav-icon-btn">⌕</a>
+                <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout" title="Sair" class="nav-icon-btn nav-icon-logout">↩</a>
+            </div>
+        </div>
+
+        <!-- 2. Logomarca — fundo escuro -->
         <div id="nav-logo">
             <a href="<?php echo esc_url(home_url('/')); ?>">
                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo_btp.png" alt="BTP Conecta">
             </a>
         </div>
 
-        <!-- Menu lateral — ocupa o espaço restante -->
+        <!-- 3. Menu lateral — ocupa o espaço restante -->
         <nav id="navigation">
             <?php
             wp_nav_menu([
@@ -92,21 +106,8 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
             ?>
         </nav>
 
-        <!-- Usuário — rodapé da sidebar -->
-        <div id="nav-user">
-            <span id="nav-username">Bem-vindo(a)!</span>
-            <div id="nav-user-meta">
-                <?php if ($btpMatricula) : ?>
-                <span id="nav-matricula">Matrícula: <?php echo esc_html($btpMatricula); ?></span>
-                <span class="nav-sep">|</span>
-                <?php endif; ?>
-                <a href="javascript:void(0)" id="search-trigger" title="Buscar">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                </a>
-                <span class="nav-sep">|</span>
-                <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout" title="Sair">Logout</a>
-            </div>
-        </div>
+        <!-- 4. Rodapé da sidebar -->
+        <div id="nav-footer">BTP Conecta &copy; 2026</div>
 
     </div><!-- /#navigation-wrapper -->
 

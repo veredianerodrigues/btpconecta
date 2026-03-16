@@ -1,5 +1,3 @@
-/* BTP Conecta — login/css/login.css */
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -13,7 +11,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #214549 0%, #1a363a 100%);
+    background: url('/wp-content/themes/woffice-child-theme-conecta/login/img/bg-desk.jpg') center center / cover no-repeat;
     border-top: 5px solid #BDC915;
     border-bottom: 5px solid #BDC915;
 }
@@ -115,7 +113,6 @@ body {
 }
 #btn-login:hover { background: #3146c5; }
 
-/* Modal "Esqueci minha senha" */
 #esqueci-senha-box {
     position: absolute;
     top: 50%; left: 50%;
@@ -152,7 +149,6 @@ body {
 }
 #esqueci-senha-fechar:hover { color: #214549; }
 
-/* Responsivo */
 @media (max-width: 480px) {
     #login-form { padding: 28px 20px; border-radius: 0; }
     #login { align-items: flex-start; }

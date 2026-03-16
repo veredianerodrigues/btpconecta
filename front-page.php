@@ -44,14 +44,6 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
 
 <div class="content-area">
 
-    <!-- Superheader -->
-    <div class="superheader">
-        <span class="superheader-breadcrumb">
-            <a href="<?php echo esc_url(home_url('/')); ?>">Início</a>
-        </span>
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="superheader-home">Home</a>
-    </div>
-
     <!-- ── BLOCO SUPERIOR: hero + feed de notícias ───────────── -->
     <div class="home-top">
 
@@ -78,13 +70,13 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
                         : wp_trim_words($np->post_content, 15, '…');
                 ?>
                 <li class="home-news-item">
+                    <span class="home-news-date"><?php echo date_i18n('d/m/Y', strtotime($np->post_date)); ?></span>
                     <a href="<?php echo esc_url(get_permalink($np->ID)); ?>" class="home-news-title">
                         <?php echo esc_html($np->post_title); ?>
                     </a>
                     <?php if ($excerpt) : ?>
                     <p class="home-news-excerpt"><?php echo esc_html($excerpt); ?></p>
                     <?php endif; ?>
-                    <a href="<?php echo esc_url(get_permalink($np->ID)); ?>" class="home-news-plus">+</a>
                 </li>
                 <?php endforeach; ?>
             </ul>
