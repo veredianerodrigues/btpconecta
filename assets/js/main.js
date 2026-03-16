@@ -2,6 +2,27 @@
  * BTP Conecta — main.js
  * Toggle do menu lateral, busca e interações gerais.
  */
+
+// ── Service Worker + PWA Install ─────────────────────────────────
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function () {});
+}
+
+var _deferredInstall = null;
+
+window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    _deferredInstall = e;
+    var btn = document.getElementById('btp-install-btn');
+    if (btn) btn.style.display = 'flex';
+});
+
+window.addEventListener('appinstalled', function () {
+    _deferredInstall = null;
+    var btn = document.getElementById('btp-install-btn');
+    if (btn) btn.style.display = 'none';
+});
+
 (function ($) {
     'use strict';
 
@@ -90,6 +111,18 @@
 
         // Toggle do item clicado
         $li.toggleClass('menu-open', !isOpen);
+    });
+
+    // ── PWA: botão instalar ───────────────────────────────────────
+    $(document).on('click', '#btp-install-btn', function () {
+        if (!_deferredInstall) return;
+        _deferredInstall.prompt();
+        _deferredInstall.userChoice.then(function (result) {
+            if (result.outcome === 'accepted') {
+                $('#btp-install-btn').hide();
+            }
+            _deferredInstall = null;
+        });
     });
 
     // ── Toast helper ──────────────────────────────────────────────
