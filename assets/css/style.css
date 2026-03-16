@@ -25,7 +25,7 @@ html { font-size: 16px; }
 body {
     font-family: var(--font-body);
     color: var(--color-text);
-    background: var(--color-white);
+    background: #e0e0e0;
     line-height: 1.7;
 }
 a { color: var(--color-blue); text-decoration: none; }
@@ -59,24 +59,30 @@ p { margin-bottom: 1em; }
 #page-wrapper {
     display: flex;
     min-height: 100vh;
-    padding-top: 5px; /* compensar border-top */
+    padding-top: 5px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 0 30px rgba(0,0,0,.18);
+    position: relative;
 }
 
 /* ── Navigation wrapper (sidebar) ───────────────────────────── */
 #navigation-wrapper {
     width: 30%;
     min-width: 0;
-    height: 100vh;
     background: #ffffff;
     display: flex;
     flex-direction: column;
     border-right: 1px solid #E0E0E0;
-    position: fixed;
-    left: 0;
+    position: sticky;
     top: 0;
+    height: 100vh;
+    align-self: flex-start;
     z-index: 100;
     overflow: hidden;
     transition: transform .3s ease;
+    flex-shrink: 0;
 }
 
 /* 1. Barra do usuário — topo verde */
@@ -186,8 +192,8 @@ p { margin-bottom: 1em; }
     display: flex;
     align-items: center;
     min-height: 44px;
-    font-size: 12px;
-    font-weight: 400;
+    font-size: .82rem;
+    font-weight: 500;
     color: #333333;
     text-decoration: none;
     border-radius: 0;
@@ -315,11 +321,9 @@ p { margin-bottom: 1em; }
 
 /* ── Main content ────────────────────────────────────────────── */
 #main-header {
-    position: fixed;
-    top: 5px;
-    left: var(--sidebar-width);
-    right: 0;
-    height: 0; /* Oculto até ativar busca */
+    position: sticky;
+    top: 0;
+    height: 0;
     overflow: hidden;
     background: var(--color-white);
     box-shadow: 0 2px 8px rgba(0,0,0,.08);
@@ -339,13 +343,11 @@ p { margin-bottom: 1em; }
 }
 
 #main-content {
-    margin-left: var(--sidebar-width);
     flex: 1;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background: #ffffff;
-    padding: 0 10%;
 }
 
 /* ── Content area ────────────────────────────────────────────── */
