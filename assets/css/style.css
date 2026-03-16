@@ -628,8 +628,7 @@ p { margin-bottom: 1em; }
     border-radius: 20px;
     font-size: .75em;
     font-weight: 700;
-    text-transform: uppercase;
-    color: var(--color-white);
+    color: #2c5a1e;
     letter-spacing: .5px;
     text-decoration: none;
 }
