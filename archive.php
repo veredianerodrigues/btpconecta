@@ -17,25 +17,8 @@ if (is_category()) {
     $archive_title = get_the_archive_title();
 }
 
-// Imagem de fundo do hero: usa a imagem destacada do post mais recente da categoria
-$hero_image_url = '';
-if (is_category()) {
-    $latest = get_posts([
-        'numberposts' => 1,
-        'category'    => get_queried_object_id(),
-        'meta_key'    => '_thumbnail_id',
-        'post_type'   => 'post',
-    ]);
-    if ($latest) {
-        $url = get_the_post_thumbnail_url($latest[0]->ID, 'large');
-        if ($url) {
-            $hero_image_url = $url;
-        }
-    }
-}
-$default_img  = get_template_directory_uri() . '/images/header_padrao.jpg';
-$hero_bg      = $hero_image_url ?: $default_img;
-$hero_style   = 'style="background-image: url(' . esc_url($hero_bg) . ');"';
+$default_img = get_template_directory_uri() . '/images/header_padrao.jpg';
+$hero_style  = 'style="background-image: url(' . esc_url($default_img) . ');"';
 ?>
 
 <div class="content-area">
