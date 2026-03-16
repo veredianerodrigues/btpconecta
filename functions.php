@@ -23,6 +23,7 @@ function btpconecta_setup(): void {
     add_theme_support('responsive-embeds');         // Embeds responsivos (YouTube, etc.)
     add_theme_support('wp-block-styles');           // Estilos nativos dos blocos Gutenberg
     add_theme_support('automatic-feed-links');      // Links de feed no <head>
+    add_theme_support('elementor');                 // Compatibilidade com Elementor
 
     register_nav_menus([
         'primary'         => __('Menu Principal', 'btpconecta'),

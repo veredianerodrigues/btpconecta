@@ -916,6 +916,13 @@ p { margin-bottom: 1em; }
     max-width: var(--content-max);
     margin: 0 auto;
     padding: 32px 0;
+}
+
+/* Elementor: remove constraints quando o builder está ativo */
+.elementor-page .single-post-content .entry-content,
+.elementor-page .page-content .entry-content {
+    max-width: 100%;
+    padding: 0;
     font-size: 1rem;
     line-height: 1.8;
     color: var(--color-text);
