@@ -1,0 +1,14 @@
+# BTP Conecta — Proteção do diretório do tema
+
+# Desabilita listagem de diretórios
+Options -Indexes
+
+# Bloqueia acesso direto a arquivos de documentação interna
+<FilesMatch "\.(md|txt|sql|log|sh|bak|orig|DS_Store)$">
+    Require all denied
+</FilesMatch>
+
+# Bloqueia acesso direto ao arquivo de planejamento
+<Files "implementacao.md">
+    Require all denied
+</Files>

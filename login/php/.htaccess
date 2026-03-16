@@ -1,0 +1,10 @@
+# BTP Conecta — Proteção do diretório login/php
+
+# Desabilita listagem de diretórios
+Options -Indexes
+
+# Bloqueia acesso HTTP direto ao config.php
+# (o arquivo é usado apenas via include PHP, nunca chamado diretamente)
+<Files "config.php">
+    Require all denied
+</Files>
