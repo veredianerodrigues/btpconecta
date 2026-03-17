@@ -53,8 +53,8 @@ function btp_horario_admin_page(): void {
                 $notice = 'Arquivo inválido. Envie um arquivo .csv.';
                 $n_type = 'error';
             } else {
-                // Move para pasta temporária dentro do tema para processamento
-                $dest = get_template_directory() . '/assets/uploads/_horario_tmp.csv';
+                // Usa diretório temporário do sistema (sempre disponível)
+                $dest = sys_get_temp_dir() . DIRECTORY_SEPARATOR . '_horario_tmp_' . uniqid() . '.csv';
 
                 if (move_uploaded_file($tmp_path, $dest)) {
                     // Garante que a função de parse está disponível
