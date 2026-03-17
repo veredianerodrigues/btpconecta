@@ -104,7 +104,7 @@ if ($status === 0) {
             "Content-Type: application/json",
             "User-Agent: PHP"
         ],
-        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_SSL_VERIFYPEER => BTP_CURL_SSL_VERIFY,
     ]);
 
     $jsonRes     = curl_exec($curl);

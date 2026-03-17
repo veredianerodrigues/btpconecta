@@ -8,4 +8,9 @@ $loginUrlSend = "https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/
 // Intervalos de tempo de login
 $loginIntervalMaxKeepConected = 1;   // em dias
 $loginIntervalCheckCredentials = 60; // em minutos
+
+// Verificação SSL nas chamadas cURL ao servidor Senior.
+// Manter false em ambientes sem certificado CA configurado (QAS/HTTP).
+// Alterar para true em produção com HTTPS e CA bundle instalado.
+define('BTP_CURL_SSL_VERIFY', false);
 ?>
