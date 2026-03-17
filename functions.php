@@ -368,6 +368,27 @@ add_filter('single_template', function (string $template): string {
     return $template;
 });
 
+// ─── Contagem de visualizações ────────────────────────────────────────────────
+
+/**
+ * Retorna o número de visualizações armazenadas no post_meta (_btp_views).
+ */
+function btpconecta_get_post_views(int $post_id): int {
+    return (int) get_post_meta($post_id, '_btp_views', true);
+}
+
+/**
+ * Incrementa o contador de visualizações a cada visita a um post individual.
+ * Executado em template_redirect para garantir que o post está disponível.
+ */
+add_action('template_redirect', function (): void {
+    if (!is_single()) {
+        return;
+    }
+    $post_id = get_queried_object_id();
+    update_post_meta($post_id, '_btp_views', btpconecta_get_post_views($post_id) + 1);
+});
+
 // ─── Módulos de funcionalidade ────────────────────────────────────────────────
 
 require_once get_template_directory() . '/inc/parse-horario.php';
