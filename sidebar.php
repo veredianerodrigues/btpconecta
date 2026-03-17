@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — sidebar.php
  * Sidebar direita (opcional). O menu lateral principal fica no header.php (navigation-wrapper).

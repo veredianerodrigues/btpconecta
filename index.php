@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — index.php
  * Home page: hero/banner + feed Acontece na BTP + grid de atalhos.

@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — single.php
  * Template do post individual com suporte completo ao Gutenberg.

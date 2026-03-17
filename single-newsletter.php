@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — single-newsletter.php
  * Post individual de Newsletter — layout full-width para o Elementor.

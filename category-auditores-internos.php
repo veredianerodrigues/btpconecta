@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — category-auditores-internos.php
  * Template específico da categoria Auditores Internos.

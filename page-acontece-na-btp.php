@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — page-acontece-na-btp.php
  * Redireciona para o archive da categoria homônima.

@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — template-parts/content-single.php
  * Conteúdo do post individual (usado por single.php).

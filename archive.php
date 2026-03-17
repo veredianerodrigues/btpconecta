@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — archive.php
  * Listagem de posts/categorias com grid de cards moderno.

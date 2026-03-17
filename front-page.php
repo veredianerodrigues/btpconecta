@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — front-page.php
  * Usado quando WordPress tem "página estática" definida em Configurações → Leitura.

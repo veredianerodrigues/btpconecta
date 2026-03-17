@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — template-parts/content-card.php
  * Card de notícia para a listagem (archive.php, index.php).

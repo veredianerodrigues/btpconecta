@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — template-parts/share-buttons.php
  * Botões de compartilhamento: WhatsApp, E-mail e Copiar URL.

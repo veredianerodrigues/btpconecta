@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * BTP Conecta — category-newsletter.php
  * Listagem de edições da Newsletter BTP Conecta.
