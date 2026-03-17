@@ -389,6 +389,42 @@ add_action('template_redirect', function (): void {
     update_post_meta($post_id, '_btp_views', btpconecta_get_post_views($post_id) + 1);
 });
 
+// ─── Auto-token para usuários WP logados (admin/editores) ────────────────────
+// Garante que quem acessa o WP admin também tenha btpUserToken,
+// necessário para o plugin btp-upload-path servir imagens de /wp-content/uploads/.
+add_action('init', function (): void {
+    if (!is_user_logged_in()) return;
+    if (!empty($_COOKIE['btpUserToken'])) return;
+
+    global $wpdb;
+
+    $wp_user    = wp_get_current_user();
+    $user_login = $wp_user->user_email ?: $wp_user->user_login;
+
+    $letters = 'abcdefghijkmnopqrstuvxyz23456789';
+    $token   = '';
+    for ($i = 0; $i < 32; $i++) {
+        $token .= $letters[random_int(0, strlen($letters) - 1)];
+    }
+
+    $expires_at = gmdate('Y-m-d H:i:s', time() + 3600);
+    $ip         = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+
+    $wpdb->insert('btpconecta_tokens', [
+        'token'      => $token,
+        'user'       => $user_login,
+        'ip'         => $ip,
+        'ativo'      => 1,
+        'expires_at' => $expires_at,
+    ]);
+
+    $validate = time() + 3600;
+    setcookie('btpUserName',  $user_login, $validate, '/', '.btpconecta.com.br');
+    setcookie('btpUserToken', $token,      $validate, '/', '.btpconecta.com.br');
+    $_COOKIE['btpUserToken'] = $token;
+    $_COOKIE['btpUserName']  = $user_login;
+});
+
 // ─── Módulos de funcionalidade ────────────────────────────────────────────────
 
 require_once get_template_directory() . '/inc/parse-horario.php';
