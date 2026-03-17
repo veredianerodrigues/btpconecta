@@ -192,6 +192,10 @@ if ($status === 0) {
                     $ip_escaped = $mysqli->real_escape_string($ip);
                     $mysqli->query("DELETE FROM btpconecta_login_attempts WHERE ip = '$ip_escaped'");
 
+                    // Expira cookies antigos sem domínio (host-scoped)
+                    setcookie("btpUserName",  '', 1, '/');
+                    setcookie("btpUserToken", '', 1, '/');
+                    // Seta cookies com domínio wildcard
                     setcookie("btpUserName",  $user,  $validate, '/', '.btpconecta.com.br');
                     setcookie("btpUserToken", $token, $validate, '/', '.btpconecta.com.br');
                     $status = 1;
