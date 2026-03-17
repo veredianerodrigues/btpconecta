@@ -72,6 +72,7 @@ $link_portal       = 'https://portaldocliente.btp.com.br/';
                 ?>
                 <li class="home-news-item">
                     <div class="home-news-item-body">
+                        <span class="home-news-label">Destaques</span>
                         <a href="<?php echo esc_url(get_permalink($np->ID)); ?>" class="home-news-title">
                             <?php echo esc_html($np->post_title); ?>
                         </a>

@@ -452,6 +452,15 @@ p { margin-bottom: 1em; }
     display: block;
 }
 .home-news-date { display: none; }
+.home-news-label {
+    display: block;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 3px;
+}
 .home-news-title {
     display: block;
     color: var(--color-primary);
@@ -657,15 +666,15 @@ p { margin-bottom: 1em; }
     margin-top: 6px;
 }
 .post-hero-meta .post-date { display: flex; align-items: center; gap: 4px; }
-.post-category-badge {
+.post-category-label {
     display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: .75em;
+    font-size: .8em;
     font-weight: 700;
-    color: #2c5a1e;
-    letter-spacing: .5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     text-decoration: none;
+    opacity: .9;
+    margin-bottom: 6px;
 }
 
 /* ── Main container (conteúdo) ───────────────────────────────── */

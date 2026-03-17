@@ -17,12 +17,12 @@ while (have_posts()) : the_post();
     $cat_url     = $primary_cat ? get_category_link($primary_cat->term_id) : home_url('/');
     $cat_name    = $primary_cat ? $primary_cat->name : '';
 
-    // URL da imagem de capa para o hero
-    $hero_style = '';
-    if (has_post_thumbnail()) {
-        $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-        $hero_style = 'style="background-image: url(' . esc_url($img_url) . ');"';
-    }
+    // URL da imagem de capa para o hero (fallback para imagem padrão)
+    $default_img = get_template_directory_uri() . '/images/header_padrao.jpg';
+    $img_url     = has_post_thumbnail()
+        ? get_the_post_thumbnail_url(get_the_ID(), 'full')
+        : $default_img;
+    $hero_style  = 'style="background-image: url(' . esc_url($img_url) . ');"';
 ?>
 
 <div class="content-area">
@@ -42,13 +42,13 @@ while (have_posts()) : the_post();
     </div>
 
     <!-- Hero com imagem de capa e título sobreposto -->
-    <div class="post-hero <?php echo has_post_thumbnail() ? 'has-thumbnail' : 'no-thumbnail'; ?>" <?php echo $hero_style; ?>>
+    <div class="post-hero has-thumbnail" <?php echo $hero_style; ?>>
         <div class="post-hero-overlay">
             <div class="post-hero-inner">
                 <?php if ($cat_name) : ?>
                     <a href="<?php echo esc_url($cat_url); ?>"
-                       class="post-category-badge"
-                       style="background-color: <?php echo esc_attr($cat_color); ?>">
+                       class="post-category-label"
+                       style="color: <?php echo esc_attr($cat_color); ?>">
                         <?php echo esc_html($cat_name); ?>
                     </a>
                 <?php endif; ?>
