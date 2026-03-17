@@ -360,6 +360,11 @@ add_filter('single_template', function (string $template): string {
     return $template;
 });
 
+// ─── Módulos de funcionalidade ────────────────────────────────────────────────
+
+require_once get_template_directory() . '/inc/parse-horario.php';
+require_once get_template_directory() . '/inc/admin-horario.php';
+
 function btpconecta_category_color(string $slug = ''): string {
     $colors = [
         'institucional'           => '#214549',

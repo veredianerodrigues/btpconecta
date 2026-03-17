@@ -218,4 +218,82 @@ window.addEventListener('appinstalled', function () {
         });
     }
 
+    // ── Horário de Ônibus — filtros + busca ──────────────────────
+    function btpHorarioInit() {
+        var $wrapper      = $('.horario-wrapper');
+        var $groupBtns    = $wrapper.find('.horario-group-btn');
+        var $sectionBtns  = $wrapper.find('.horario-section-btn');
+        var $searchInput  = $wrapper.find('#horario-search');
+        var $count        = $('#horario-count');
+
+        var activeGroup   = 0;
+        var activeSection = 0;
+
+        // Mostra apenas a tabela que corresponde ao grupo + seção ativos
+        function showActiveTable() {
+            $wrapper.find('.horario-table-wrap').each(function () {
+                var g = parseInt($(this).data('group'), 10);
+                var s = parseInt($(this).data('section'), 10);
+                var visible = (g === activeGroup && s === activeSection);
+                $(this).toggle(visible);
+            });
+            // Limpa busca ao trocar filtro
+            $searchInput.val('');
+            filterRows('');
+        }
+
+        // Filtra linhas da tabela visível pelo texto digitado
+        function filterRows(term) {
+            var $activeWrap = $wrapper.find(
+                '.horario-table-wrap[data-group="' + activeGroup + '"][data-section="' + activeSection + '"]'
+            );
+            var $rows = $activeWrap.find('.horario-row');
+            var needle = term.toLowerCase().trim();
+            var visible = 0;
+
+            $rows.each(function () {
+                var text = $(this).text().toLowerCase();
+                var match = (needle === '' || text.indexOf(needle) !== -1);
+                $(this).prop('hidden', !match);
+                if (match) { visible++; }
+            });
+
+            if (needle !== '') {
+                $count.text(visible + ' horário(s) encontrado(s)');
+            } else {
+                $count.text('');
+            }
+        }
+
+        // Clique nos botões de grupo (dia da semana)
+        $groupBtns.on('click', function () {
+            var $btn = $(this);
+            activeGroup = parseInt($btn.data('group'), 10);
+            $groupBtns.removeClass('active').attr('aria-pressed', 'false');
+            $btn.addClass('active').attr('aria-pressed', 'true');
+            showActiveTable();
+        });
+
+        // Clique nos botões de seção (ponto de saída)
+        $sectionBtns.on('click', function () {
+            var $btn = $(this);
+            activeSection = parseInt($btn.data('section'), 10);
+            $sectionBtns.removeClass('active').attr('aria-pressed', 'false');
+            $btn.addClass('active').attr('aria-pressed', 'true');
+            showActiveTable();
+        });
+
+        // Busca em tempo real
+        $searchInput.on('input', function () {
+            filterRows($(this).val());
+        });
+
+        // Estado inicial: mostra grupo 0, seção 0
+        showActiveTable();
+    }
+
+    if ($('.horario-wrapper').length) {
+        btpHorarioInit();
+    }
+
 })(jQuery);
