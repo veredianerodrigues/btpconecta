@@ -157,7 +157,7 @@ if ($status === 0) {
 
 // ── Persiste token no banco ───────────────────────────────────────────────────
 if ($status === 0) {
-    $validate      = time() + 3600;
+    $validate      = time() + (12 * 3600); // 12 horas (alinhado com BTP_TTL_HOURS do plugin)
     $expires_at_db = gmdate('Y-m-d H:i:s', $validate);
 
     $stmt = $mysqli->prepare(

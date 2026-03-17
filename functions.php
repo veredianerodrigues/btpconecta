@@ -389,41 +389,28 @@ add_action('template_redirect', function (): void {
     update_post_meta($post_id, '_btp_views', btpconecta_get_post_views($post_id) + 1);
 });
 
-// ─── Auto-token para usuários WP logados (admin/editores) ────────────────────
-// Garante que quem acessa o WP admin também tenha btpUserToken,
-// necessário para o plugin btp-upload-path servir imagens de /wp-content/uploads/.
-add_action('init', function (): void {
-    if (!is_user_logged_in()) return;
-    if (!empty($_COOKIE['btpUserToken'])) return;
+// ─── Força autenticação por cookie no endpoint REST do btp-upload-path ───────
+// WordPress REST API (rest_cookie_check_errors, priority 10) chama
+// wp_set_current_user(0) quando não há nonce, derrubando is_user_logged_in().
+// Este filtro roda em priority 20 (após o reset) e re-autentica via cookie WP
+// apenas para a rota btp/v1/download, restaurando o bypass do plugin.
+add_filter('rest_authentication_errors', function ($result) {
+    $uri = $_SERVER['REQUEST_URI']   ?? '';
+    $qs  = $_SERVER['QUERY_STRING']  ?? '';
 
-    global $wpdb;
+    $is_btp = strpos($uri, '/wp-json/btp/v1/download/') !== false
+           || strpos($qs,  'rest_route=/btp/v1/download/') !== false;
 
-    $wp_user    = wp_get_current_user();
-    $user_login = $wp_user->user_email ?: $wp_user->user_login;
+    if (!$is_btp) return $result;
 
-    $letters = 'abcdefghijkmnopqrstuvxyz23456789';
-    $token   = '';
-    for ($i = 0; $i < 32; $i++) {
-        $token .= $letters[random_int(0, strlen($letters) - 1)];
+    $user_id = wp_validate_auth_cookie('', 'logged_in');
+    if ($user_id) {
+        wp_set_current_user($user_id);
+        return null;
     }
 
-    $expires_at = gmdate('Y-m-d H:i:s', time() + 3600);
-    $ip         = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
-
-    $wpdb->insert('btpconecta_tokens', [
-        'token'      => $token,
-        'user'       => $user_login,
-        'ip'         => $ip,
-        'ativo'      => 1,
-        'expires_at' => $expires_at,
-    ]);
-
-    $validate = time() + 3600;
-    setcookie('btpUserName',  $user_login, $validate, '/', '.btpconecta.com.br');
-    setcookie('btpUserToken', $token,      $validate, '/', '.btpconecta.com.br');
-    $_COOKIE['btpUserToken'] = $token;
-    $_COOKIE['btpUserName']  = $user_login;
-});
+    return $result;
+}, 20);
 
 // ─── Módulos de funcionalidade ────────────────────────────────────────────────
 
