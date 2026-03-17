@@ -19,6 +19,7 @@ body {
 #login-form-loading {
     display: none;
     text-align: center;
+
 }
 #login-form-loading img { width: 48px; }
 
@@ -27,9 +28,10 @@ body {
     border-radius: 12px;
     padding: 40px 44px;
     width: 100%;
-    max-width: 440px;
+    max-width: 600px;
     box-shadow: 0 8px 40px rgba(0,0,0,.25);
     position: relative;
+    border: 4px solid #bdc915;
 }
 
 #login-logo { margin-bottom: 24px; }
@@ -43,9 +45,9 @@ body {
 
 .login-notice {
     background: #fff8e1;
-    border-left: 4px solid #E2AB3B;
+    border-left: 2px solid #e2ab3b26;
     padding: 10px 14px;
-    font-size: .85em;
+    font-size: .8em;
     color: #5a4000;
     border-radius: 4px;
     margin-bottom: 20px;
@@ -88,7 +90,7 @@ body {
 
 .forgot-link {
     font-size: .82em;
-    color: #3146c5;
+    color: #8d9e13;
     text-decoration: none;
     display: inline-block;
     margin-bottom: 20px;
@@ -111,7 +113,7 @@ body {
     cursor: pointer;
     transition: background .15s;
 }
-#btn-login:hover { background: #3146c5; }
+#btn-login:hover { background: #8d9e13; }
 
 #esqueci-senha-box {
     position: absolute;
@@ -139,7 +141,7 @@ body {
     font-size: .9em;
     margin-bottom: 14px;
 }
-#esqueci-senha-box .btn-senior:hover { background: #3146c5; }
+#esqueci-senha-box .btn-senior:hover { background: #8d9e13; }
 
 #esqueci-senha-fechar {
     position: absolute;
