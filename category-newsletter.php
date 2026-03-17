@@ -34,6 +34,15 @@ $hero_style    = 'style="background-image: url(' . esc_url($default_img) . ');"'
 
     <div class="main-container">
 
+        <?php
+        // Conteúdo editável via Elementor: cria uma página WP com o slug
+        // "newsletter-intro" e edite-a com Elementor. O conteúdo aparece aqui.
+        $intro = get_page_by_path('newsletter-intro');
+        if ($intro) {
+            echo apply_filters('the_content', $intro->post_content);
+        }
+        ?>
+
         <?php if (have_posts()) : ?>
         <div class="newsletter-grid">
             <?php while (have_posts()) : the_post(); ?>
