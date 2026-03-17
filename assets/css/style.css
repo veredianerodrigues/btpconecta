@@ -1566,6 +1566,11 @@ p { margin-bottom: 1em; }
     font-size: .82rem;
     color: #555;
 }
+/* Cabeçalho da tabela: Horário e Veículo em destaque */
+.horario-table thead th.col-horario,
+.horario-table thead th.col-veiculo {
+    color: #bdc915;
+}
 .horario-table .col-trajeto {
     line-height: 1.5;
 }
