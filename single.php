@@ -46,9 +46,7 @@ while (have_posts()) : the_post();
         <div class="post-hero-overlay">
             <div class="post-hero-inner">
                 <?php if ($cat_name) : ?>
-                    <a href="<?php echo esc_url($cat_url); ?>"
-                       class="post-category-label"
-                       style="color: <?php echo esc_attr($cat_color); ?>">
+                    <a href="<?php echo esc_url($cat_url); ?>" class="post-category-label">
                         <?php echo esc_html($cat_name); ?>
                     </a>
                 <?php endif; ?>

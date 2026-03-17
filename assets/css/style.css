@@ -673,6 +673,7 @@ p { margin-bottom: 1em; }
     letter-spacing: 1px;
     text-transform: uppercase;
     text-decoration: none;
+    color: #ffffff;
     opacity: .9;
     margin-bottom: 6px;
 }
