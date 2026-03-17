@@ -107,6 +107,14 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
             ?>
         </nav>
 
+        <div id="btp-proximo-onibus" style="display:none">
+            <div class="btp-onibus-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                Próxima saída
+            </div>
+            <div id="btp-onibus-content">—</div>
+        </div>
+
         <div id="nav-footer">BTP Conecta &copy; 2026</div>
 
     </div>

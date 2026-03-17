@@ -149,7 +149,43 @@ p { margin-bottom: 1em; }
     margin-top: 5%;
 }
 
-/* 4. Rodapé da sidebar */
+/* 4. Widget próxima saída de ônibus */
+#btp-proximo-onibus {
+    margin: 8px 10px;
+    padding: 8px 10px;
+    background: #f0f4f0;
+    border-left: 3px solid #4d7c3a;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    color: #214549;
+}
+.btp-onibus-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #4d7c3a;
+    margin-bottom: 5px;
+}
+#btp-onibus-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.btp-onibus-ponto {
+    display: flex;
+    justify-content: space-between;
+    color: #214549;
+}
+.btp-onibus-ponto b {
+    font-weight: 600;
+    color: #555;
+}
+
+/* 5. Rodapé da sidebar */
 #nav-footer {
     height: 28px;
     min-height: 28px;

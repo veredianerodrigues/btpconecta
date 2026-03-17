@@ -296,4 +296,85 @@ window.addEventListener('appinstalled', function () {
         btpHorarioInit();
     }
 
+    // ── Widget: Próxima saída de ônibus ───────────────────────────────────────
+    if (typeof btpHorarios !== 'undefined' && btpHorarios.grupos && btpHorarios.grupos.length === 3) {
+
+        function btpToMinutes(horario) {
+            var parts = horario.split(':');
+            return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+        }
+
+        function btpNextDeparture(linhas) {
+            var now     = new Date();
+            var current = now.getHours() * 60 + now.getMinutes();
+            var isPM    = current >= 720;
+
+            // Ordena por minutos
+            var sorted = linhas.slice().sort(function (a, b) {
+                return btpToMinutes(a.horario) - btpToMinutes(b.horario);
+            });
+
+            var next;
+            if (isPM) {
+                // Próxima saída PM (>= hora atual e >= 12:00)
+                next = sorted.find(function (l) {
+                    var m = btpToMinutes(l.horario);
+                    return m >= current && m >= 720;
+                });
+                // Se não houver mais PM, pega primeiro AM (madrugada)
+                if (!next) {
+                    next = sorted.find(function (l) {
+                        return btpToMinutes(l.horario) < 720;
+                    });
+                }
+            } else {
+                // Próxima saída AM (>= hora atual e < 12:00)
+                next = sorted.find(function (l) {
+                    var m = btpToMinutes(l.horario);
+                    return m >= current && m < 720;
+                });
+                // Se não houver mais AM, pega primeiro PM
+                if (!next) {
+                    next = sorted.find(function (l) {
+                        return btpToMinutes(l.horario) >= 720;
+                    });
+                }
+            }
+            return next || sorted[0];
+        }
+
+        function btpGetGroupIndex() {
+            var day = new Date().getDay(); // 0=Dom, 6=Sáb, 1-5=Seg-Sex
+            if (day === 0) return 2;       // Domingo
+            if (day === 6) return 1;       // Sábados e Feriados
+            return 0;                      // Segunda a Sexta
+        }
+
+        function btpUpdateProximoOnibus() {
+            var grupo   = btpHorarios.grupos[btpGetGroupIndex()];
+            if (!grupo || !grupo.secoes || grupo.secoes.length < 3) return;
+
+            var nomes = ['Terminal', 'Museu Pelé', 'Alfândega'];
+            var partes = [];
+
+            for (var i = 0; i < 3; i++) {
+                var secao = grupo.secoes[i];
+                if (!secao || !secao.linhas || !secao.linhas.length) continue;
+                var dep = btpNextDeparture(secao.linhas);
+                if (dep) {
+                    partes.push('<span class="btp-onibus-ponto"><b>' + nomes[i] + '</b> ' + dep.horario + '</span>');
+                }
+            }
+
+            if (partes.length) {
+                $('#btp-onibus-content').html(partes.join(''));
+                $('#btp-proximo-onibus').show();
+            }
+        }
+
+        btpUpdateProximoOnibus();
+        // Atualiza a cada minuto
+        setInterval(btpUpdateProximoOnibus, 60000);
+    }
+
 })(jQuery);

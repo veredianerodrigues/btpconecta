@@ -93,6 +93,14 @@ function btpconecta_scripts(): void {
             'nonce'   => wp_create_nonce('btp_share_email'),
         ]);
     }
+
+    // Passa dados de horários de ônibus para o widget do header
+    $horarios_raw = get_option('btp_horarios_data', '');
+    if ($horarios_raw) {
+        wp_localize_script('btpconecta-main', 'btpHorarios', [
+            'grupos' => json_decode($horarios_raw, true),
+        ]);
+    }
 }
 add_action('wp_enqueue_scripts', 'btpconecta_scripts');
 
