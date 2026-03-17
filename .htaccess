@@ -8,11 +8,6 @@ Options -Indexes
     Require all denied
 </FilesMatch>
 
-# Bloqueia acesso direto ao arquivo de planejamento
-<Files "implementacao.md">
-    Require all denied
-</Files>
-
 # Bloqueia acesso HTTP direto a arquivos PHP do tema
 # (WordPress os carrega via include interno, não via HTTP)
 <FilesMatch "\.php$">
