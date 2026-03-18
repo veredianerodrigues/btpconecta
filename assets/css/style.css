@@ -66,8 +66,8 @@ p { margin-bottom: 1em; }
 
 /* ── Navigation wrapper (sidebar) ───────────────────────────── */
 #navigation-wrapper {
-    width: 25%;
-    min-width: 25%;
+    width: 20%;
+    min-width: 20%;
     background: #ffffff;
     display: flex;
     flex-direction: column;
@@ -126,8 +126,8 @@ p { margin-bottom: 1em; }
 
 /* 2. Logomarca — fundo branco */
 #nav-logo {
-    height: 80px;
-    min-height: 80px;
+    height: 88px;
+    min-height: 88px;
     margin: 30px 26px;
     background: #ffffff;
     display: flex;
