@@ -127,11 +127,12 @@ function btp_horario_render_trajeto(string $trajeto): string {
 
             <!-- Campo de busca -->
             <div class="horario-search-wrap">
+                <h3>Buscar horário:</h3>
                 <input
                     type="search"
                     id="horario-search"
                     class="horario-search"
-                    placeholder="Buscar por horário ou trajeto…"
+                    placeholder="Digite aqui o horário desejado…"
                     aria-label="Buscar horários"
                 >
             </div>

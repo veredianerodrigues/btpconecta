@@ -4,12 +4,11 @@
  * Inclui verificação de autenticação customizada antes de qualquer output HTML.
  */
 
-// Carrega as constantes do WordPress se ainda não carregadas (para chamadas diretas a login.php)
+
 if (!defined('ABSPATH')) {
     require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 }
 
-// Verifica autenticação — libera Elementor (preview/editor) e usuários logados no WP Admin
 $is_elementor = isset($_GET['elementor-preview']) || isset($_GET['elementor_library']);
 $is_wp_admin  = is_user_logged_in() && current_user_can('edit_posts');
 
@@ -18,7 +17,6 @@ if (!$is_elementor && !$is_wp_admin && !btpconecta_logged()) {
     exit;
 }
 
-// Matrícula do usuário logado via cookie (parte antes do @ no email)
 $btpMatricula = '';
 if (isset($_COOKIE['btpUserName'])) {
     $raw          = htmlspecialchars($_COOKIE['btpUserName'], ENT_COMPAT, 'UTF-8', true);
@@ -110,7 +108,7 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
         <div id="btp-proximo-onibus" style="display:none">
             <div class="btp-onibus-label">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                Próxima saída
+                Próxima saída Ônibus BTP:
             </div>
             <div id="btp-onibus-content">—</div>
         </div>
