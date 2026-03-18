@@ -308,8 +308,32 @@ add_action( 'template_redirect', 'btpconecta_restrict_category_archives' );
  */
 function btpconecta_first_content_image(int $post_id): string {
     $content = get_post_field('post_content', $post_id);
-    preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches);
-    return $matches[1] ?? '';
+
+    // Padrões de URL que identificam imagens placeholder — nunca exibir como destaque
+    $placeholder_patterns = [
+        'elementor/assets/images/placeholder',
+        'wp-includes/images/media/',
+        'placeholder.png',
+        'placeholder.jpg',
+        'placeholder.svg',
+    ];
+
+    preg_match_all('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches);
+
+    foreach ($matches[1] ?? [] as $src) {
+        $is_placeholder = false;
+        foreach ($placeholder_patterns as $pattern) {
+            if (stripos($src, $pattern) !== false) {
+                $is_placeholder = true;
+                break;
+            }
+        }
+        if (!$is_placeholder) {
+            return $src;
+        }
+    }
+
+    return '';
 }
 
 // ─── Compartilhar por e-mail (AJAX) ──────────────────────────────────────────

@@ -781,7 +781,6 @@ p { margin-bottom: 1em; }
 .card-date { display: flex; align-items: center; gap: 4px; }
 .card-views { display: flex; align-items: center; gap: 4px; }
 .post-views { display: inline-flex; align-items: center; gap: 5px; opacity: .85; }
-.newsletter-card-views { display: flex; align-items: center; gap: 4px; font-size: .82rem; color: #888; margin-top: 4px; }
 .card-readmore {
     color: var(--color-blue);
     font-weight: 600;
@@ -1113,48 +1112,6 @@ p { margin-bottom: 1em; }
     text-decoration: none;
 }
 
-/* ── Newsletter ──────────────────────────────────────────────── */
-.newsletter-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    padding: 24px 0;
-}
-.newsletter-card {
-    display: flex;
-    flex-direction: column;
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
-    text-decoration: none;
-    transition: box-shadow .2s, transform .2s;
-    background: #fff;
-}
-.newsletter-card:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
-}
-.newsletter-card-img {
-    width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    display: block;
-}
-.newsletter-card-placeholder {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.newsletter-card-placeholder img { width: 70px; opacity: .4; filter: brightness(0) invert(1); }
-.newsletter-card-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
-.newsletter-card-date { font-size: .75rem; color: #4d7c3a; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
-.newsletter-card-title { font-size: 1rem; font-weight: 700; color: var(--color-primary); margin-bottom: 8px; line-height: 1.4; }
-.newsletter-card-excerpt { font-size: .83rem; color: #666; flex: 1; margin-bottom: 12px; }
-.newsletter-card-read { font-size: .82rem; font-weight: 600; color: #4d7c3a; }
-
 /* Newsletter — post individual */
 .newsletter-content { width: 100%; }
 .newsletter-edition-label {
@@ -1171,8 +1128,6 @@ p { margin-bottom: 1em; }
 }
 .newsletter-back { padding: 24px 32px 40px; }
 
-@media (max-width: 900px) { .newsletter-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px)  { .newsletter-grid { grid-template-columns: 1fr; } }
 
 /* ── Tabela de posts (category-auditores-internos) ───────────── */
 .posts-table {
