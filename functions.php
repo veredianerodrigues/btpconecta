@@ -251,6 +251,29 @@ function btpconecta_allowed_categories(): array {
 }
 
 /**
+ * Remove o prefixo /category/ das URLs de categoria.
+ * Ex: /category/noticias/ → /noticias/
+ */
+add_filter('category_link', function (string $link): string {
+    return str_replace('/category/', '/', $link);
+}, 10, 1);
+
+/**
+ * Registra rewrite rules para as categorias permitidas sem o prefixo /category/.
+ * Deve ser seguido de flush_rewrite_rules() (feito automaticamente ao salvar
+ * permalinks em Settings > Permalinks).
+ */
+add_action('init', function (): void {
+    foreach (btpconecta_allowed_categories() as $slug) {
+        add_rewrite_rule(
+            '^' . preg_quote($slug, '#') . '/?$',
+            'index.php?category_name=' . $slug,
+            'top'
+        );
+    }
+});
+
+/**
  * Bloqueia o acesso a arquivos de categorias não permitidas.
  * Redireciona para 404 se o slug não estiver na lista de permitidos.
  * Executado no hook 'template_redirect', antes de qualquer output.
@@ -416,6 +439,58 @@ add_filter('rest_authentication_errors', function ($result) {
 
 require_once get_template_directory() . '/inc/parse-horario.php';
 require_once get_template_directory() . '/inc/admin-horario.php';
+
+// ─── Meta box: categorias para o template "Listagem de Categoria" ─────────────
+
+add_action('add_meta_boxes', function (): void {
+    add_meta_box(
+        'btp_categories_meta',
+        'Categorias para listar',
+        'btpconecta_categories_meta_box_cb',
+        'page',
+        'side',
+        'default'
+    );
+});
+
+function btpconecta_categories_meta_box_cb(WP_Post $post): void {
+    wp_nonce_field('btp_categories_save', 'btp_categories_nonce');
+    $value = get_post_meta($post->ID, '_btp_categories', true);
+    ?>
+    <label for="btp_cat_field" style="display:block;margin-bottom:5px;font-size:12px;color:#444;">
+        Slugs separados por vírgula:
+    </label>
+    <input
+        type="text"
+        id="btp_cat_field"
+        name="btp_categories"
+        value="<?php echo esc_attr($value); ?>"
+        style="width:100%;"
+        placeholder="ex: noticias, acontece-na-btp"
+    >
+    <p style="font-size:11px;color:#888;margin-top:6px;">
+        Usado pelo template <em>Listagem de Categoria</em>.<br>
+        Com múltiplos slugs, o filtro aparece automaticamente.
+    </p>
+    <?php
+}
+
+add_action('save_post_page', function (int $post_id): void {
+    if (
+        !isset($_POST['btp_categories_nonce']) ||
+        !wp_verify_nonce($_POST['btp_categories_nonce'], 'btp_categories_save')
+    ) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['btp_categories'])) {
+        update_post_meta(
+            $post_id,
+            '_btp_categories',
+            sanitize_text_field($_POST['btp_categories'])
+        );
+    }
+});
 
 function btpconecta_category_color(string $slug = ''): string {
     $colors = [

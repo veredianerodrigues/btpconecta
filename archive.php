@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 /**
  * BTP Conecta — archive.php
- * Listagem de posts/categorias com grid de cards moderno.
+ * Listagem de posts/categorias em layout de lista.
  */
 get_header();
 
@@ -46,9 +46,9 @@ $hero_style  = 'style="background-image: url(' . esc_url($default_img) . ');"';
     <div class="main-container">
 
         <?php if (have_posts()) : ?>
-            <div class="posts-grid">
+            <div class="posts-list">
                 <?php while (have_posts()) : the_post(); ?>
-                    <?php get_template_part('template-parts/content', 'card'); ?>
+                    <?php get_template_part('template-parts/content', 'list'); ?>
                 <?php endwhile; ?>
             </div>
             <?php btpconecta_pagination(); ?>
