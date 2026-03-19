@@ -268,7 +268,7 @@ add_action('init', function (): void {
         add_rewrite_rule(
             '^' . preg_quote($slug, '#') . '/?$',
             'index.php?category_name=' . $slug,
-            'top'
+            'bottom'
         );
     }
 });
