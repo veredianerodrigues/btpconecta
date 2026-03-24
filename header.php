@@ -61,7 +61,7 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
         <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo_btp.png" alt="BTP Conecta">
     </a>
     <a href="javascript:void(0)" id="mobile-search-trigger" aria-label="Buscar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </a>
 </div>
 

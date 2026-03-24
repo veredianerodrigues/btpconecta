@@ -294,6 +294,14 @@ function btpconecta_restrict_category_archives(): void {
 }
 add_action( 'template_redirect', 'btpconecta_restrict_category_archives' );
 
+// ─── Busca em todos os tipos de conteúdo ─────────────────────────────────────
+add_filter('pre_get_posts', function (WP_Query $query): void {
+    if (!$query->is_main_query() || !$query->is_search() || is_admin()) {
+        return;
+    }
+    $query->set('post_type', ['post', 'page']);
+});
+
 // ─── Cor da categoria (para badges e marcadores) ─────────────────────────────
 
 /**

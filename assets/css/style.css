@@ -122,6 +122,7 @@ p { margin-bottom: 1em; }
     transition: opacity .15s;
 }
 .nav-icon-btn:hover { opacity: .75; text-decoration: none; }
+#search-trigger { font-size: 15.4px; }
 .nav-icon-logout { color: #ffffff; width: auto; padding: 0 6px; gap: 5px; font-size: .75rem; font-weight: 600; letter-spacing: .3px; }
 
 /* 2. Logomarca — fundo branco */
