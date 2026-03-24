@@ -84,26 +84,42 @@ p { margin-bottom: 1em; }
 
 /* 1. Barra do usuário — topo verde */
 #nav-user {
-    height: 48px;
-    min-height: 48px;
+    min-height: 64px;
     background: #4D7C3A;
     border-radius: 0;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 16px;
+    flex-shrink: 0;
+    gap: 2px;
+}
+#nav-user-top {
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
-    flex-shrink: 0;
+}
+#nav-greeting {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 400;
+    line-height: 1.2;
 }
 #nav-user-info {
     display: flex;
-    flex-direction: column;
-    gap: 1px;
+    align-items: center;
+    gap: 6px;
 }
 #nav-username {
-    font-size: 14px;
+    font-size: 13px;
     color: #ffffff;
     font-weight: 600;
     line-height: 1.2;
+}
+.nav-user-sep {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1;
 }
 #nav-user-matricula {
     font-size: 11px;
@@ -127,7 +143,7 @@ p { margin-bottom: 1em; }
     transition: opacity .15s;
 }
 .nav-icon-btn:hover { opacity: .75; text-decoration: none; }
-#search-trigger { font-size: 15.4px; }
+#search-trigger { font-size: 17px; }
 .nav-icon-logout { color: #ffffff; width: auto; padding: 0 6px; gap: 5px; font-size: .75rem; font-weight: 600; letter-spacing: .3px; }
 
 /* 2. Logomarca — fundo branco */
@@ -1398,6 +1414,9 @@ p { margin-bottom: 1em; }
 
     /* ── Barra usuário: empurra abaixo da topbar ── */
     #nav-user { margin-top: 52px; }
+
+    /* ── Menu: permite encolher para que footer fique visível ── */
+    #navigation { min-height: 0; flex-shrink: 1; }
 
     /* ── Logo na sidebar mobile: ocultar pois a topbar já exibe ── */
     #nav-logo { display: none; }

@@ -76,24 +76,28 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
     <div id="navigation-wrapper">
 
         <div id="nav-user">
+            <div id="nav-user-top">
+                <span id="nav-greeting">Bem-vindo(a)!</span>
+                <div id="nav-user-icons">
+                    <a href="javascript:void(0)" id="search-trigger" title="Buscar" class="nav-icon-btn">⌕</a>
+                    <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout" title="Sair" class="nav-icon-btn nav-icon-logout">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        <span>Sair</span>
+                    </a>
+                </div><!-- /nav-user-icons -->
+            </div><!-- /nav-user-top -->
             <div id="nav-user-info">
-                <span id="nav-username"><?php echo $btpNomeCompleto ? esc_html($btpNomeCompleto) : 'Bem-vindo(a)!'; ?></span>
+                <span id="nav-username"><?php echo $btpNomeCompleto ? esc_html($btpNomeCompleto) : '—'; ?></span>
                 <?php if ($btpMatricula) : ?>
+                <span class="nav-user-sep">|</span>
                 <span id="nav-user-matricula"><?php echo esc_html($btpMatricula); ?></span>
                 <?php endif; ?>
-            </div>
-            <div id="nav-user-icons">
-                <a href="javascript:void(0)" id="search-trigger" title="Buscar" class="nav-icon-btn">⌕</a>
-                <a href="<?php echo esc_url($logout_url); ?>" id="nav-logout" title="Sair" class="nav-icon-btn nav-icon-logout">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                        <polyline points="16 17 21 12 16 7"/>
-                        <line x1="21" y1="12" x2="9" y2="12"/>
-                    </svg>
-                    <span>Sair</span>
-                </a>
-            </div>
-        </div>
+            </div><!-- /nav-user-info -->
+        </div><!-- /nav-user -->
 
         <div id="nav-logo">
             <a href="<?php echo esc_url(home_url('/')); ?>">
