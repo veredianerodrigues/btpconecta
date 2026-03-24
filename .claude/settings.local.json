@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(del \"c:\\\\Users\\\\supero\\\\source\\\\repos\\\\btpconecta\\\\category-newsletter.php\")"
-    ]
-  }
-}

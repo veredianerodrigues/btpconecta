@@ -22,8 +22,8 @@ $btpNomeCompleto = '';
 if (isset($_COOKIE['btpUserName'])) {
     $raw          = htmlspecialchars($_COOKIE['btpUserName'], ENT_COMPAT, 'UTF-8', true);
     $btpMatricula = explode('@', $raw)[0];
-    if ($btpMatricula && function_exists('rd_user_known_name')) {
-        $btpNomeCompleto = (string) rd_user_known_name($btpMatricula);
+    if ($raw && function_exists('rd_user_known_name')) {
+        $btpNomeCompleto = (string) rd_user_known_name($raw);
     }
 }
 

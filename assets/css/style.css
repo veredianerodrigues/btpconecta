@@ -1376,7 +1376,7 @@ p { margin-bottom: 1em; }
         width: 280px;
         min-width: 0;
         height: 100vh;
-        overflow-y: auto;
+        overflow: hidden;
         transform: translateX(-100%);
         z-index: 200;
         box-shadow: none;
