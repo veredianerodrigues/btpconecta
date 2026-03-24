@@ -105,6 +105,11 @@ p { margin-bottom: 1em; }
     font-weight: 600;
     line-height: 1.2;
 }
+#nav-user-matricula {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.2;
+}
 #nav-user-icons {
     display: flex;
     align-items: center;

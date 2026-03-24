@@ -18,9 +18,13 @@ if (!$is_elementor && !$is_wp_admin && !btpconecta_logged()) {
 }
 
 $btpMatricula = '';
+$btpNomeCompleto = '';
 if (isset($_COOKIE['btpUserName'])) {
     $raw          = htmlspecialchars($_COOKIE['btpUserName'], ENT_COMPAT, 'UTF-8', true);
     $btpMatricula = explode('@', $raw)[0];
+    if ($btpMatricula && function_exists('rd_user_known_name')) {
+        $btpNomeCompleto = (string) rd_user_known_name($btpMatricula);
+    }
 }
 
 $logout_url = get_template_directory_uri() . '/login/php/logout.php';
@@ -73,7 +77,10 @@ $logout_url = get_template_directory_uri() . '/login/php/logout.php';
 
         <div id="nav-user">
             <div id="nav-user-info">
-                <span id="nav-username">Bem-vindo(a)!</span>
+                <span id="nav-username"><?php echo $btpNomeCompleto ? esc_html($btpNomeCompleto) : 'Bem-vindo(a)!'; ?></span>
+                <?php if ($btpMatricula) : ?>
+                <span id="nav-user-matricula"><?php echo esc_html($btpMatricula); ?></span>
+                <?php endif; ?>
             </div>
             <div id="nav-user-icons">
                 <a href="javascript:void(0)" id="search-trigger" title="Buscar" class="nav-icon-btn">⌕</a>
