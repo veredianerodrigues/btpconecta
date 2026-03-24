@@ -72,7 +72,7 @@ function btpconecta_scripts(): void {
         'btpconecta-style',
         get_template_directory_uri() . '/assets/css/style.css',
         ['btpconecta-google-fonts'],
-        '1.0.0'
+        '1.1.0'
     );
 
     // Substitui o jQuery bundled do WordPress por versão mais recente via CDN
@@ -85,7 +85,7 @@ function btpconecta_scripts(): void {
         'btpconecta-main',
         get_template_directory_uri() . '/assets/js/main.js',
         ['jquery'],
-        '1.0.0',
+        '1.1.0',
         true
     );
 
