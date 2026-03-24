@@ -2,6 +2,9 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+
+// ── Módulos do tema ───────────────────────────────────────────────────────────
+require_once get_template_directory() . '/modules/refeitorio/loader.php';
 /**
  * BTP Conecta — functions.php
  *
