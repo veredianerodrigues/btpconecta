@@ -15,7 +15,8 @@ $cat_name    = $primary_cat ? $primary_cat->name : '';
 
 $excerpt = get_the_excerpt();
 if (empty($excerpt)) {
-    $excerpt = wp_trim_words(get_the_content(), 25, '…');
+    $content = wp_strip_all_tags(strip_shortcodes(get_the_content()));
+    $excerpt = wp_trim_words($content, 25, '…');
 }
 
 $logo_url  = esc_url(get_template_directory_uri() . '/images/logo_btp.png');

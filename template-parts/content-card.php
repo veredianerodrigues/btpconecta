@@ -13,10 +13,11 @@ $cat_color   = $primary_cat ? btpconecta_category_color($primary_cat->slug) : '#
 $cat_url     = $primary_cat ? get_category_link($primary_cat->term_id) : '';
 $cat_name    = $primary_cat ? $primary_cat->name : '';
 
-// Excerpt com fallback
+// Excerpt com fallback — strip shortcodes e tags HTML
 $excerpt = get_the_excerpt();
 if (empty($excerpt)) {
-    $excerpt = wp_trim_words(get_the_content(), 20, '…');
+    $content = wp_strip_all_tags(strip_shortcodes(get_the_content()));
+    $excerpt = wp_trim_words($content, 20, '…');
 }
 
 // Imagem: thumbnail → primeira imagem do conteúdo → logo
