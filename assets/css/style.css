@@ -1330,7 +1330,7 @@ p { margin-bottom: 1em; }
 
     #nav-user { margin-top: 52px; }
 
-    #navigation { min-height: 0; flex-shrink: 1; overflow: visible; }
+    #navigation { flex: none; overflow: visible; }
 
     #nav-logo { display: none; }
 
