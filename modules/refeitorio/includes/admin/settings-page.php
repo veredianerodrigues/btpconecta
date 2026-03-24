@@ -150,8 +150,6 @@ function rd_admin_settings_page() {
   wp_enqueue_style( 'wp-jquery-ui-dialog' );
   ?>
   <style id="rd-datepicker-settings-styles">
-    #rd-datepicker-wrapper,
-    #ui-datepicker-div,
     .ui-datepicker {
       background: #fff !important;
       border: 1px solid #ddd !important;
@@ -160,12 +158,8 @@ function rd_admin_settings_page() {
       box-shadow: 0 5px 20px rgba(0,0,0,0.25) !important;
       z-index: 99999 !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-header,
-    #ui-datepicker-div .ui-datepicker-header,
-    .ui-datepicker .ui-datepicker-header,
     .ui-datepicker-header {
       background: #256f4a !important;
-      background-color: #256f4a !important;
       color: #fff !important;
       padding: 12px 16px !important;
       border-radius: 6px !important;
@@ -177,9 +171,6 @@ function rd_admin_settings_page() {
       width: 100% !important;
       box-sizing: border-box !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-title,
-    #ui-datepicker-div .ui-datepicker-title,
-    .ui-datepicker .ui-datepicker-title,
     .ui-datepicker-title {
       color: #fff !important;
       display: flex !important;
@@ -192,14 +183,10 @@ function rd_admin_settings_page() {
       line-height: 1.5 !important;
       text-align: center !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-title select,
-    #ui-datepicker-div .ui-datepicker-title select,
-    .ui-datepicker .ui-datepicker-title select,
     .ui-datepicker-title select,
     .ui-datepicker-month,
     .ui-datepicker-year {
       background: rgba(255,255,255,0.3) !important;
-      background-color: rgba(255,255,255,0.3) !important;
       color: #fff !important;
       border: 1px solid rgba(255,255,255,0.4) !important;
       padding: 6px 10px !important;
@@ -208,23 +195,13 @@ function rd_admin_settings_page() {
       font-weight: 600 !important;
       min-width: 72px !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-title select option,
-    #ui-datepicker-div .ui-datepicker-title select option,
     .ui-datepicker select option {
       background: #fff !important;
-      background-color: #fff !important;
       color: #333 !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-prev,
-    #rd-datepicker-wrapper .ui-datepicker-next,
-    #ui-datepicker-div .ui-datepicker-prev,
-    #ui-datepicker-div .ui-datepicker-next,
-    .ui-datepicker .ui-datepicker-prev,
-    .ui-datepicker .ui-datepicker-next,
     .ui-datepicker-prev,
     .ui-datepicker-next {
       background: rgba(255,255,255,0.2) !important;
-      background-color: rgba(255,255,255,0.2) !important;
       color: #fff !important;
       border: none !important;
       border-radius: 6px !important;
@@ -241,75 +218,36 @@ function rd_admin_settings_page() {
       padding: 0 !important;
       position: static !important;
       flex: 0 0 auto !important;
-      transition: background 0.2s ease, background-color 0.2s ease;
+      transition: background 0.2s ease;
     }
-    #rd-datepicker-wrapper .ui-datepicker-prev:hover,
-    #rd-datepicker-wrapper .ui-datepicker-next:hover,
-    #ui-datepicker-div .ui-datepicker-prev:hover,
-    #ui-datepicker-div .ui-datepicker-next:hover,
-    .ui-datepicker .ui-datepicker-prev:hover,
-    .ui-datepicker .ui-datepicker-next:hover,
     .ui-datepicker-prev:hover,
     .ui-datepicker-next:hover {
       background: rgba(255,255,255,0.3) !important;
-      background-color: rgba(255,255,255,0.3) !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-prev::before,
-    #ui-datepicker-div .ui-datepicker-prev::before,
-    .ui-datepicker .ui-datepicker-prev::before,
-    .ui-datepicker-prev::before {
-      content: '<';
-      font-size: 16px !important;
-      font-weight: 700 !important;
-      line-height: 1 !important;
-    }
-    #rd-datepicker-wrapper .ui-datepicker-next::before,
-    #ui-datepicker-div .ui-datepicker-next::before,
-    .ui-datepicker .ui-datepicker-next::before,
-    .ui-datepicker-next::before {
-      content: '>';
-      font-size: 16px !important;
-      font-weight: 700 !important;
-      line-height: 1 !important;
-    }
-    #rd-datepicker-wrapper .ui-datepicker-prev span,
-    #rd-datepicker-wrapper .ui-datepicker-next span,
-    #ui-datepicker-div .ui-datepicker-prev span,
-    #ui-datepicker-div .ui-datepicker-next span,
-    .ui-datepicker .ui-datepicker-prev span,
-    .ui-datepicker .ui-datepicker-next span,
+    .ui-datepicker-prev::before { content: '<'; font-size: 16px !important; font-weight: 700 !important; line-height: 1 !important; }
+    .ui-datepicker-next::before { content: '>'; font-size: 16px !important; font-weight: 700 !important; line-height: 1 !important; }
     .ui-datepicker-prev span,
-    .ui-datepicker-next span {
-      display: none !important;
-    }
-    #rd-datepicker-wrapper .ui-datepicker-calendar,
-    #ui-datepicker-div .ui-datepicker-calendar {
+    .ui-datepicker-next span { display: none !important; }
+    .ui-datepicker .ui-datepicker-calendar {
       background: #fff !important;
       width: 100% !important;
       border-collapse: collapse !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-calendar thead,
-    #ui-datepicker-div .ui-datepicker-calendar thead {
-      background: #f8f9fa !important;
-    }
-    #rd-datepicker-wrapper .ui-datepicker-calendar th,
-    #ui-datepicker-div .ui-datepicker-calendar th {
+    .ui-datepicker .ui-datepicker-calendar thead { background: #f8f9fa !important; }
+    .ui-datepicker .ui-datepicker-calendar th {
       background: #f8f9fa !important;
       padding: 8px 4px !important;
       font-weight: 600 !important;
       color: #666 !important;
       text-align: center !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-calendar td,
-    #ui-datepicker-div .ui-datepicker-calendar td {
+    .ui-datepicker .ui-datepicker-calendar td {
       background: #fff !important;
       padding: 2px !important;
       text-align: center !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-calendar td a,
-    #rd-datepicker-wrapper .ui-datepicker-calendar td span,
-    #ui-datepicker-div .ui-datepicker-calendar td a,
-    #ui-datepicker-div .ui-datepicker-calendar td span {
+    .ui-datepicker .ui-datepicker-calendar td a,
+    .ui-datepicker .ui-datepicker-calendar td span {
       background: #fff !important;
       display: block !important;
       padding: 8px !important;
@@ -319,33 +257,17 @@ function rd_admin_settings_page() {
       text-decoration: none !important;
       border: none !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-calendar td a:hover,
-    #ui-datepicker-div .ui-datepicker-calendar td a:hover {
-      background: #e8f5ef !important;
-      color: #256f4a !important;
-    }
-    #rd-datepicker-wrapper .ui-datepicker-calendar td .ui-state-active,
-    #ui-datepicker-div .ui-datepicker-calendar td .ui-state-active {
-      background: #256f4a !important;
-      color: #fff !important;
-      font-weight: 700 !important;
-    }
-    #rd-datepicker-wrapper .ui-datepicker-calendar td .ui-state-highlight,
-    #ui-datepicker-div .ui-datepicker-calendar td .ui-state-highlight {
-      background: #e8f5ef !important;
-      color: #256f4a !important;
-      font-weight: 600 !important;
-    }
-    #rd-datepicker-wrapper .ui-datepicker-buttonpane,
-    #ui-datepicker-div .ui-datepicker-buttonpane {
+    .ui-datepicker .ui-datepicker-calendar td a:hover { background: #e8f5ef !important; color: #256f4a !important; }
+    .ui-datepicker .ui-datepicker-calendar td .ui-state-active { background: #256f4a !important; color: #fff !important; font-weight: 700 !important; }
+    .ui-datepicker .ui-datepicker-calendar td .ui-state-highlight { background: #e8f5ef !important; color: #256f4a !important; font-weight: 600 !important; }
+    .ui-datepicker-buttonpane {
       background: #fff !important;
       padding-top: 10px !important;
       border-top: 1px solid #e0e0e0 !important;
       margin-top: 10px !important;
       text-align: right !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-buttonpane button,
-    #ui-datepicker-div .ui-datepicker-buttonpane button {
+    .ui-datepicker-buttonpane button {
       background: #256f4a !important;
       color: #fff !important;
       border: none !important;
@@ -355,60 +277,19 @@ function rd_admin_settings_page() {
       font-weight: 600 !important;
       margin-left: 8px !important;
     }
-    #rd-datepicker-wrapper .ui-datepicker-buttonpane button:hover,
-    #ui-datepicker-div .ui-datepicker-buttonpane button:hover {
-      background: #1f5b3c !important;
-    }
+    .ui-datepicker-buttonpane button:hover { background: #1f5b3c !important; }
     @media (max-width: 480px) {
-      #rd-datepicker-wrapper,
-      #ui-datepicker-div {
-        width: 95% !important;
-        max-width: 320px !important;
-        font-size: 14px !important;
-        padding: 10px !important;
-      }
-      #rd-datepicker-wrapper .ui-datepicker-header,
-      #ui-datepicker-div .ui-datepicker-header {
-        padding: 10px 8px !important;
-      }
-      #rd-datepicker-wrapper .ui-datepicker-title select,
-      #ui-datepicker-div .ui-datepicker-title select {
-        padding: 4px 6px !important;
-        font-size: 13px !important;
-      }
-      #rd-datepicker-wrapper .ui-datepicker-calendar th,
-      #ui-datepicker-div .ui-datepicker-calendar th {
-        padding: 6px 2px !important;
-        font-size: 11px !important;
-      }
-      #rd-datepicker-wrapper .ui-datepicker-calendar td a,
-      #rd-datepicker-wrapper .ui-datepicker-calendar td span,
-      #ui-datepicker-div .ui-datepicker-calendar td a,
-      #ui-datepicker-div .ui-datepicker-calendar td span {
-        padding: 6px 4px !important;
-        font-size: 13px !important;
-        min-width: 28px !important;
-      }
-      #rd-datepicker-wrapper .ui-datepicker-buttonpane button,
-      #ui-datepicker-div .ui-datepicker-buttonpane button {
-        padding: 6px 12px !important;
-        font-size: 13px !important;
-      }
-      #rd-datepicker-wrapper .ui-datepicker-prev,
-      #rd-datepicker-wrapper .ui-datepicker-next,
-      #ui-datepicker-div .ui-datepicker-prev,
-      #ui-datepicker-div .ui-datepicker-next {
-        width: 28px !important;
-        height: 28px !important;
-        font-size: 14px !important;
-      }
+      .ui-datepicker { width: 95% !important; max-width: 320px !important; font-size: 14px !important; padding: 10px !important; }
+      .ui-datepicker-header { padding: 10px 8px !important; }
+      .ui-datepicker-title select { padding: 4px 6px !important; font-size: 13px !important; }
+      .ui-datepicker .ui-datepicker-calendar th { padding: 6px 2px !important; font-size: 11px !important; }
+      .ui-datepicker .ui-datepicker-calendar td a,
+      .ui-datepicker .ui-datepicker-calendar td span { padding: 6px 4px !important; font-size: 13px !important; min-width: 28px !important; }
+      .ui-datepicker-buttonpane button { padding: 6px 12px !important; font-size: 13px !important; }
+      .ui-datepicker-prev, .ui-datepicker-next { width: 28px !important; height: 28px !important; font-size: 14px !important; }
     }
     @media (min-width: 481px) and (max-width: 768px) {
-      #rd-datepicker-wrapper,
-      #ui-datepicker-div {
-        width: auto !important;
-        max-width: 340px !important;
-      }
+      .ui-datepicker { width: auto !important; max-width: 340px !important; }
     }
   </style>
   <div class="wrap">
@@ -426,7 +307,8 @@ function rd_admin_settings_page() {
                    name="<?php echo esc_attr(RD_OPT_DATE_START); ?>"
                    value="<?php echo esc_attr($date_start_br); ?>"
                    placeholder="dd/mm/aaaa"
-                   maxlength="10">
+                   maxlength="10"
+                   autocomplete="off">
             <p class="description">Data inicial para agendamentos (DD/MM/AAAA). Deixe em branco para usar janela de dias.</p>
           </td>
         </tr>
@@ -437,7 +319,8 @@ function rd_admin_settings_page() {
                    name="<?php echo esc_attr(RD_OPT_DATE_END); ?>"
                    value="<?php echo esc_attr($date_end_br); ?>"
                    placeholder="dd/mm/aaaa"
-                   maxlength="10">
+                   maxlength="10"
+                   autocomplete="off">
             <p class="description">Data final para agendamentos (DD/MM/AAAA). Deixe em branco para usar janela de dias.</p>
           </td>
         </tr>
@@ -566,17 +449,6 @@ function rd_admin_settings_page() {
         changeYear: true,
         showButtonPanel: true,
         yearRange: '-1:+1',
-        beforeShow: function(input, inst) {
-          $(input).attr('autocomplete', 'off');
-          var currentInput = input;
-          setTimeout(function() {
-            $('#ui-datepicker-div').attr('id', 'rd-datepicker-wrapper');
-            $('.ui-datepicker-close').off('click').on('click', function(e) {
-              e.preventDefault();
-              $(currentInput).datepicker('hide');
-            });
-          }, 1);
-        },
         onSelect: function(dateText, inst) {
           var that = this;
           setTimeout(function() {
@@ -586,19 +458,6 @@ function rd_admin_settings_page() {
         onClose: function() {
           $(this).blur();
         }
-      });
-      $(document).on('mousedown', function(e) {
-        var target = $(e.target);
-        var isDatepicker = target.closest('.ui-datepicker').length > 0 ||
-                         target.closest('#ui-datepicker-div').length > 0 ||
-                         target.closest('#rd-datepicker-wrapper').length > 0;
-        var isInput = target.hasClass('rd-date-input');
-        dateInputs.each(function() {
-          var input = $(this);
-          if (!isDatepicker && !isInput && input.datepicker('widget').is(':visible')) {
-            input.datepicker('hide');
-          }
-        });
       });
       var mediaUploader;
       $('#rd-upload-image-btn').on('click', function(e) {
