@@ -2,16 +2,10 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-/**
- * BTP Conecta — front-page.php
- * Usado quando WordPress tem "página estática" definida em Configurações → Leitura.
- * Home page: hero/banner + feed Acontece na BTP + grid de atalhos.
- */
 get_header();
 
 $img_base = get_template_directory_uri() . '/assets/images/';
 
-// ── 1. HERO: imagem destacada + custom fields da página estática definida como home ──
 $home_page_id = get_option('page_on_front');
 $link_banner  = $home_page_id ? get_post_meta($home_page_id, 'link_banner', true) : '';
 $texto_banner = $home_page_id ? get_post_meta($home_page_id, 'texto_banner', true) : '';
@@ -19,12 +13,10 @@ $link_seg     = $home_page_id ? get_post_meta($home_page_id, 'link_seguranca', t
 $data_acid    = $home_page_id ? get_post_meta($home_page_id, 'data_calculo_acidente', true) : '';
 $hero_img     = $home_page_id ? get_the_post_thumbnail_url($home_page_id, 'full') : '';
 
-// Fallback do link do banner para a home
 if (empty($link_banner)) {
     $link_banner = home_url('/');
 }
 
-// Contador de dias sem acidente
 $dias_sem_acidente = 0;
 if ($data_acid) {
     $dia1              = strtotime($data_acid) + 97140;
@@ -32,7 +24,6 @@ if ($data_acid) {
     $dias_sem_acidente = max(0, (int) (($dia2 - $dia1) / 86400));
 }
 
-// ── 2. FEED: últimos 3 posts da categoria "destaques-da-home-page" ───────────
 $news_cat      = get_category_by_slug('destaques-da-home-page');
 $news_cat_link = get_category_by_slug('acontece-na-btp');
 $news_posts    = $news_cat ? get_posts([
@@ -40,7 +31,6 @@ $news_posts    = $news_cat ? get_posts([
     'category'    => $news_cat->term_id,
 ]) : [];
 
-// ── 3. GRID 3×2: hardcoded com imagens do tema ───────────────────────────────
 $link_universidade = 'https://universidadebtp.edusense.app/#/';
 $link_risco        = 'https://linktr.ee/safetybtp';
 $link_portal       = 'https://portaldocliente.btp.com.br/';

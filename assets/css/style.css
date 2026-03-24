@@ -172,13 +172,14 @@ p { margin-bottom: 1em; }
 
 /* 4. Widget próxima saída de ônibus */
 #btp-proximo-onibus {
-    margin: 8px 10px;
+    margin: 16px 10px 8px;
     padding: 8px 10px;
     background: #f0f4f0;
     border-left: 3px solid #4d7c3a;
     border-radius: 4px;
     font-size: 0.78rem;
     color: #214549;
+    flex-shrink: 0;
 }
 .btp-onibus-label {
     display: flex;
