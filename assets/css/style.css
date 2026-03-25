@@ -1402,9 +1402,7 @@ p { margin-bottom: 1em; }
     gap: 12px 24px;
 }
 .horario-legend-list li {
-    display: flex;
-    align-items: center;
-    gap: 7px;
+    display: ruby;
     font-size: .85rem;
     color: #444;
 }
