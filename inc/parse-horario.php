@@ -38,6 +38,7 @@ function btpconecta_parse_horario_csv(string $file_path): array {
         'Saída Terminal',
         'Saída Museu Pelé',
         'Saída Alfândega',
+        'Saída Armazém',
     ];
 
     // Abre o arquivo
@@ -57,7 +58,7 @@ function btpconecta_parse_horario_csv(string $file_path): array {
         $grupos[] = ['nome' => $gn, 'secoes' => $secoes];
     }
 
-    $section_index = -1; // índice global da seção atual (0-8)
+    $section_index = -1; // índice global da seção atual (0-11)
 
     while (($row = fgetcsv($handle, 0, ';')) !== false) {
         // Pula linhas completamente vazias
@@ -70,7 +71,7 @@ function btpconecta_parse_horario_csv(string $file_path): array {
         $col1 = isset($row[1]) ? strtoupper(trim($row[1])) : '';
         if ($col1 === 'TRAJETO') {
             $section_index++;
-            // section_index 0-2 → grupo 0, 3-5 → grupo 1, 6-8 → grupo 2
+            // section_index 0-3 → grupo 0, 4-7 → grupo 1, 8-11 → grupo 2
             continue; // o nome da seção já está predefinido por posição
         }
 
@@ -92,10 +93,10 @@ function btpconecta_parse_horario_csv(string $file_path): array {
             continue;
         }
 
-        $grupo_idx = (int) floor($section_index / 3);
-        $secao_idx = $section_index % 3;
+        $grupo_idx = (int) floor($section_index / 4);
+        $secao_idx = $section_index % 4;
 
-        // Garante que o índice existe (proteção contra CSVs com mais de 9 seções)
+        // Garante que o índice existe (proteção contra CSVs com mais de 12 seções)
         if (!isset($grupos[$grupo_idx]['secoes'][$secao_idx])) {
             continue;
         }

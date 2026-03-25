@@ -352,12 +352,12 @@ window.addEventListener('appinstalled', function () {
 
         function btpUpdateProximoOnibus() {
             var grupo   = btpHorarios.grupos[btpGetGroupIndex()];
-            if (!grupo || !grupo.secoes || grupo.secoes.length < 3) return;
+            if (!grupo || !grupo.secoes || grupo.secoes.length < 4) return;
 
-            var nomes = ['Terminal', 'Museu Pelé', 'Alfândega'];
+            var nomes = ['Terminal', 'Museu Pelé', 'Alfândega', 'Armazém'];
             var partes = [];
 
-            for (var i = 0; i < 3; i++) {
+            for (var i = 0; i < 4; i++) {
                 var secao = grupo.secoes[i];
                 if (!secao || !secao.linhas || !secao.linhas.length) continue;
                 var dep = btpNextDeparture(secao.linhas);
