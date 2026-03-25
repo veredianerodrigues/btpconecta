@@ -138,10 +138,10 @@ function btp_rest_download(WP_REST_Request $req) {
         wp_normalize_path(trailingslashit(BTP_UPLOAD_DIR) . $rel),
     ];
 
-    $allowedRoots = [
-        realpath(ABSPATH . BTP_WP_UPLOAD_DIR),
-        realpath(BTP_UPLOAD_DIR),
-    ];
+    $allowedRoots = array_filter(array_map(function ($p) {
+        $r = realpath($p);
+        return $r ? wp_normalize_path(trailingslashit($r)) : null;
+    }, [ABSPATH . BTP_WP_UPLOAD_DIR, BTP_UPLOAD_DIR]));
 
     foreach ($cands as $p) {
         if (is_link($p)) {
@@ -154,9 +154,10 @@ function btp_rest_download(WP_REST_Request $req) {
             continue;
         }
 
-        $inside = false;
+        $realNorm = wp_normalize_path($real);
+        $inside   = false;
         foreach ($allowedRoots as $root) {
-            if ($root && strpos($real, rtrim($root, '/') . '/') === 0) {
+            if (strpos($realNorm, $root) === 0) {
                 $inside = true;
                 break;
             }
