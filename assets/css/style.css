@@ -1309,7 +1309,7 @@ p { margin-bottom: 1em; }
         width: 280px;
         min-width: 0;
         height: 100vh;
-        overflow-y: auto;
+        overflow: hidden;
         transform: translateX(-100%);
         z-index: 200;
         box-shadow: none;
@@ -1330,7 +1330,7 @@ p { margin-bottom: 1em; }
 
     #nav-user { margin-top: 52px; }
 
-    #navigation { flex: none; overflow: visible; }
+    #navigation { flex: 1; min-height: 0; overflow-y: auto; margin-top: 0; }
 
     #nav-logo { display: none; }
 
