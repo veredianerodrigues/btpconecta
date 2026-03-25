@@ -30,6 +30,24 @@ function btp_log($message) {
     }
 }
 
+add_action('template_redirect', function () {
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    $excluded = apply_filters('btp_secure_uploads_exclude_dirs', ['photo-gallery']);
+    $match = false;
+    foreach ($excluded as $dir) {
+        if (strpos($uri, '/wp-content/uploads/' . $dir . '/') !== false) {
+            $match = true;
+            break;
+        }
+    }
+    if (!$match) return;
+    if (btp_token_ok()) return;
+    status_header(401);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['error' => 'Não autorizado']);
+    exit;
+}, 0);
+
 add_filter('upload_dir', function ($dirs) {
     $sub = $dirs['subdir'];
     $dirs['basedir'] = BTP_UPLOAD_DIR;
@@ -93,12 +111,19 @@ add_action('rest_api_init', function () {
     register_rest_route('btp/v1', '/download/(?P<file>.+)', [
         'methods'             => 'GET',
         'args'                => ['file' => ['required' => true]],
-        'permission_callback' => 'btp_token_ok',
+        'permission_callback' => '__return_true',
         'callback'            => 'btp_rest_download',
     ]);
 });
 
 function btp_rest_download(WP_REST_Request $req) {
+    if (!btp_token_ok()) {
+        status_header(401);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'Não autorizado']);
+        exit;
+    }
+
     $rel = ltrim((string) urldecode($req['file']), '/');
     $rel = wp_normalize_path($rel);
 
@@ -187,15 +212,20 @@ HTACCESS;
         error_log('Falha ao criar .htaccess na pasta segura');
     }
 
-    $rules = [
-        '<IfModule mod_rewrite.c>',
-        'RewriteEngine On',
+    $excluded = apply_filters('btp_secure_uploads_exclude_dirs', [
+        'photo-gallery',
+    ]);
+    $rules = ['<IfModule mod_rewrite.c>', 'RewriteEngine On'];
+    foreach ($excluded as $dir) {
+        $rules[] = 'RewriteCond %{REQUEST_URI} !^/wp-content/uploads/' . preg_quote($dir, null) . '/';
+    }
+    $rules = array_merge($rules, [
         'RewriteRule ^wp-content/uploads/(.+)$ index.php?rest_route=/btp/v1/download/$1 [QSA,L]',
         '</IfModule>',
         '<IfModule mod_headers.c>',
         'Header set Vary "Cookie"',
         '</IfModule>',
-    ];
+    ]);
 
     if (!insert_with_markers(ABSPATH . '.htaccess', 'BTP_SECURE_UPLOADS', $rules)) {
         error_log('Falha ao atualizar .htaccess principal');
