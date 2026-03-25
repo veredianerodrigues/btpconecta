@@ -88,6 +88,7 @@
   function load(node,album,opt){
     var fd=new FormData();
     fd.append('action','btp_gal_tree_children');
+    fd.append('nonce',(window.BTP_GAL&&BTP_GAL.nonce)||'');
     fd.append('parent',album);
     fd.append('title',node.getAttribute('data-title')||'human');
     fd.append('link',node.getAttribute('data-link')||'');

@@ -36,10 +36,11 @@ function btp_gal_serve_image(string $sizeKey, string $relPath) {
     }
 
     if ($sizeKey === 'raw') {
-        if (isset($_GET['download']) && $_GET['download'] == '1') {
+        if (isset($_GET['download']) && $_GET['download'] === '1') {
             nocache_headers(); header_remove('Cache-Control');
             header('Content-Type: '.btp_gal_guess_mime($srcAbs));
-            header('Content-Disposition: attachment; filename="'.basename($srcAbs).'"');
+            $safe_name = preg_replace('/[\r\n"\\\\]/', '_', basename($srcAbs));
+            header('Content-Disposition: attachment; filename="'.$safe_name.'"');
             header('Content-Length: '.filesize($srcAbs));
             readfile($srcAbs); exit;
         }

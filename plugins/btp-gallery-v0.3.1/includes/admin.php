@@ -9,6 +9,7 @@ add_action('admin_init', function(){
   register_setting('btp_gal','btp_gal_settings');
 });
 add_action('wp_ajax_btp_gal_list_albums', function(){
+  check_ajax_referer('btp_gal_admin_nonce','nonce');
   if(!current_user_can('manage_options')) wp_send_json_error('forbidden',403);
   $parent=isset($_POST['parent'])?sanitize_text_field(wp_unslash($_POST['parent'])):'';
   $depth =isset($_POST['depth'])?(int)$_POST['depth']:1;
@@ -79,6 +80,7 @@ function btp_gal_admin_page(){
   </div>
 
 <script>
+var btpGalAdminNonce = '<?php echo esc_js(wp_create_nonce('btp_gal_admin_nonce')); ?>';
 (function($){
   function build(){
     var y=$('#bg-year').val().trim();
@@ -111,7 +113,7 @@ function btp_gal_admin_page(){
     var d=parseInt($('#bg-depth').val()||'1',10);
     if(!y){ alert('Informe o ano/pasta pai.'); return; }
     $('#bg-album').html('<option>Carregando...</option>');
-    $.post(ajaxurl,{action:'btp_gal_list_albums',parent:y,depth:d},function(resp){
+    $.post(ajaxurl,{action:'btp_gal_list_albums',nonce:btpGalAdminNonce,parent:y,depth:d},function(resp){
       if(!resp||!resp.success){ alert('Erro ao listar.'); return; }
       var html='<option value="">— selecione —</option>';
       resp.data.forEach(function(al){ html+='<option value="'+al.album+'">'+al.album+' ('+al.count+')</option>'; });

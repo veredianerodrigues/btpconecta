@@ -2,11 +2,11 @@
 defined('ABSPATH') || exit;
 
 function btp_gal_register_assets(){
-  wp_register_style('btp-gal', BTP_GAL_URL.'assets/gallery.css', [], '0.3.1');
-  wp_register_script('btp-gal', BTP_GAL_URL.'assets/gallery.js', [], '0.3.1', false);
+  wp_register_style('btp-gal', BTP_GAL_URL.'assets/gallery.css', [], '1.0.0');
+  wp_register_script('btp-gal', BTP_GAL_URL.'assets/gallery.js', [], '1.0.0', false);
 }
 function btp_gal_localize_front($extra=[]){
-  $data = array_merge(['ajax'=>admin_url('admin-ajax.php')], $extra);
+  $data = array_merge(['ajax'=>admin_url('admin-ajax.php'),'nonce'=>wp_create_nonce('btp_gal_tree')], $extra);
   wp_localize_script('btp-gal','BTP_GAL',$data);
 }
 
@@ -29,7 +29,7 @@ add_shortcode('btp_gallery', function($atts){
     'page'=>isset($_GET['pg'])?(int)$_GET['pg']:1
   ], (array)get_option('btp_gal_defaults',[]));
   $a=shortcode_atts($defaults,$atts,'btp_gallery');
-  if(!$a['album'] && isset($_GET['album'])) $a['album']=rawurldecode((string)$_GET['album']);
+  if(!$a['album'] && isset($_GET['album'])) $a['album']=btp_gal_sanitize_album((string)$_GET['album']);
   if(!$a['album']) return '<p>Álbum não informado.</p>';
 
   wp_enqueue_style('btp-gal'); wp_enqueue_script('btp-gal'); btp_gal_localize_front();
@@ -114,11 +114,12 @@ add_shortcode('btp_gallery_tree', function($atts){
 });
 
 add_action('wp_ajax_btp_gal_tree_children','btp_gal_tree_children');
-add_action('wp_ajax_nopriv_btp_gal_tree_children','btp_gal_tree_children');
 function btp_gal_tree_children(){
+  check_ajax_referer('btp_gal_tree','nonce');
+  if(!btp_gal_is_authenticated()) wp_send_json_error(['msg'=>'Não autorizado'],401);
   $parent=isset($_POST['parent'])?btp_gal_sanitize_album((string)wp_unslash($_POST['parent'])):'';
-  $title =isset($_POST['title']) ?sanitize_text_field((string)wp_unslash($_POST['title'])):'human';
-  $cols  =isset($_POST['cols'])  ?(int)$_POST['cols']:4;
+  $title =in_array($_POST['title']??'',['human','raw'],true)?(string)$_POST['title']:'human';
+  $cols  =max(2,min(6,isset($_POST['cols'])?(int)$_POST['cols']:4));
   $link  =isset($_POST['link'])  ?esc_url_raw((string)wp_unslash($_POST['link'])):'';
   if(!$parent) wp_send_json_error(['msg'=>'parent vazio']);
   $dirs=btp_gal_list_dirs_immediate($parent);
