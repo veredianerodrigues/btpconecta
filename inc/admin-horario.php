@@ -181,7 +181,7 @@ function btp_horario_admin_page(): void {
                 <li>Cabeçalho de seção: linha onde a segunda coluna contém <code>TRAJETO</code></li>
                 <li>Linhas de dado: <code>HORÁRIO;TRAJETO;VEÍCULOS</code></li>
                 <li>Linhas vazias (<code>;;</code>) são ignoradas</li>
-                <li>O arquivo deve conter exatamente <strong>9 seções</strong> (3 grupos × 3 pontos de saída)</li>
+                <li>O arquivo deve conter exatamente <strong>12 seções</strong> (3 grupos × 4 pontos de saída: Terminal, Museu Pelé, Alfândega, Armazém)</li>
             </ul>
         </div>
     </div>
