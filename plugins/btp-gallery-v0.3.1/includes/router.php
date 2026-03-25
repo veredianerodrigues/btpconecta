@@ -22,6 +22,8 @@ add_action('template_redirect', function(){
     if (!$s || !$p) return;
     if (!btp_gal_is_authenticated()) {
         status_header(401);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'Não autorizado']);
         exit;
     }
     btp_gal_serve_image($s, $p);
