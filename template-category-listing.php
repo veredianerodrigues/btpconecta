@@ -124,7 +124,7 @@ foreach ($cat_slugs as $slug) {
                 ? add_query_arg('cat', $selected, str_replace($big, '%#%', esc_url(get_pagenum_link($big))))
                 : str_replace($big, '%#%', esc_url(get_pagenum_link($big)));
 
-            echo paginate_links([
+            $links = paginate_links([
                 'base'      => $paginate_base,
                 'format'    => '?paged=%#%',
                 'current'   => $paged,
@@ -132,6 +132,9 @@ foreach ($cat_slugs as $slug) {
                 'prev_text' => '&laquo; Anterior',
                 'next_text' => 'Próxima &raquo;',
             ]);
+            if ($links) {
+                echo '<nav class="navigation pagination"><div class="nav-links">' . $links . '</div></nav>';
+            }
             ?>
         <?php else : ?>
             <div class="no-posts">
