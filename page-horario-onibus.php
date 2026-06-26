@@ -89,9 +89,9 @@ function btp_horario_render_trajeto(string $trajeto): string {
         <div class="horario-legend">
             <strong>Legenda de veículos:</strong>
             <ul class="horario-legend-list">
-                <li><span class="horario-legend-icon horario-legend-micro">M</span> <strong>Micro-ônibus</strong> — 26 assentos</li>
-                <li><span class="horario-legend-icon horario-legend-onibus">Ô</span> <strong>Ônibus</strong> — 46 assentos</li>
-                <li><span class="horario-legend-icon horario-legend-van">V</span> <strong>Van</strong> — 15 assentos</li>
+                <li><span class="horario-legend-icon horario-legend-micro">M</span> <strong>Micro-ônibus</strong> 26 assentos</li>
+                <li><span class="horario-legend-icon horario-legend-onibus">Ô</span> <strong>Ônibus</strong> 46 assentos</li>
+                <li><span class="horario-legend-icon horario-legend-van">V</span> <strong>Van</strong> 15 assentos</li>
             </ul>
         </div>
 
@@ -152,7 +152,7 @@ function btp_horario_render_trajeto(string $trajeto): string {
                     <div class="horario-table-scroll">
                         <table class="horario-table">
                             <caption class="horario-table-caption">
-                                <?php echo esc_html($grupo['nome']); ?> — <?php echo esc_html($secao['nome']); ?>
+                                <?php echo esc_html($grupo['nome']); ?> <?php echo esc_html($secao['nome']); ?>
                             </caption>
                             <thead>
                                 <tr>

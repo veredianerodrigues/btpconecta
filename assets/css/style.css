@@ -1412,7 +1412,7 @@ p { margin-bottom: 1em; }
     justify-content: center;
     width: 26px;
     height: 26px;
-    border-radius: 4px;
+    border-radius: 0;
     font-size: .7rem;
     font-weight: 700;
     color: #fff;
@@ -1435,7 +1435,7 @@ p { margin-bottom: 1em; }
     display: inline-block;
     padding: 7px 16px;
     border: 2px solid var(--color-primary);
-    border-radius: 4px;
+    border-radius: 0;
     background: #fff;
     color: var(--color-primary);
     font-size: .82rem;
@@ -1475,7 +1475,7 @@ p { margin-bottom: 1em; }
     max-width: 400px;
     padding: 8px 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 0;
     font-size: .9rem;
     font-family: var(--font-body);
     color: var(--color-text);
@@ -1575,7 +1575,7 @@ p { margin-bottom: 1em; }
 .horario-empty {
     background: #fff3cd;
     border: 1px solid #ffc107;
-    border-radius: 6px;
+    border-radius: 0;
     padding: 18px 22px;
     margin: 24px 0;
     color: #856404;
@@ -1593,7 +1593,7 @@ p { margin-bottom: 1em; }
 .horario-badge {
     display: inline-block;
     padding: 1px 6px;
-    border-radius: 3px;
+    border-radius: 0;
     font-size: .72em;
     font-weight: 600;
     vertical-align: middle;
